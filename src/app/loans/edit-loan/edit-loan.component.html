@@ -1,0 +1,39 @@
+<form>
+  <mat-form-field>
+    <mat-label>Id</mat-label>
+    <input matInput placeholder="126" value="{{ loan.id }}" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      placeholder="Thirumurugan"
+      value="{{ loan.customer.name }}"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <input matInput placeholder="open" value="{{ loan.status }}" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Weight</mat-label>
+    <input matInput placeholder="4.6" value="{{ loan.weight }}" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comment</mat-label>
+    <input
+      matInput
+      placeholder="return w/o receipt"
+      value="{{ loan.comment }}"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Item</mat-label>
+    <textarea
+      matInput
+      placeholder="return w/o receipt"
+      value="{{ loan.items }}"
+    >
+    </textarea>
+  </mat-form-field>
+</form>
