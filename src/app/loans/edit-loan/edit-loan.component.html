@@ -27,13 +27,22 @@
       value="{{ loan.comment }}"
     />
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Item</mat-label>
-    <textarea
-      matInput
-      placeholder="return w/o receipt"
-      value="{{ loan.items }}"
-    >
-    </textarea>
-  </mat-form-field>
+  <br />
+  <button mat-raised-button (click)="openDialog()">Edit Items</button>
+  <table mat-table [dataSource]="itemDataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </form>
