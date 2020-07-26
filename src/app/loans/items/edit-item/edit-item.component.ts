@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit, HostListener } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IItem } from '../../item';
 
@@ -17,16 +17,16 @@ export class EditItemComponent implements OnInit {
   ) {
     this.items.forEach((item) => {
       const itemGroup = this.fb.group({
-        name: item.name,
-        quantity: item.quantity,
+        name: [item.name, Validators.required],
+        quantity: [item.quantity, Validators.required],
       });
       this.itemsForm.push(itemGroup);
     });
   }
   addItem() {
-    const newItemGroup = new FormGroup({
-      name: new FormControl(''),
-      quantity: new FormControl(''),
+    const newItemGroup = this.fb.group({
+      name: ['', Validators.required],
+      quantity: ['', Validators.required],
     });
     this.itemsForm.push(newItemGroup);
   }

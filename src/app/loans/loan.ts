@@ -1,8 +1,9 @@
 import { ICustomer } from '../customers/customer';
 import { IItem } from './item';
 import { IActivity } from './activity';
+import { IAppStatus } from '../AppStatus';
 
-export interface ILoan {
+export interface ILoan extends IAppStatus {
   id: number;
   status: string;
   weight: string;

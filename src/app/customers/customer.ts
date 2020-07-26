@@ -1,4 +1,5 @@
-export interface ICustomer {
+import { IAppStatus } from '../AppStatus';
+export interface ICustomer extends IAppStatus {
   id: number;
   name: string;
   secondaryName: string;

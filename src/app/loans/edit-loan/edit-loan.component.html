@@ -1,4 +1,5 @@
-<form>
+<p *ngIf="!loan"><br />loading...<br /></p>
+<form *ngIf="loan" (ngSubmit)="onSubmit()" [formGroup]="loanForm">
   <mat-form-field>
     <mat-label>Id</mat-label>
     <input matInput placeholder="126" value="{{ loan.id }}" />
@@ -13,20 +14,21 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Status</mat-label>
-    <input matInput placeholder="open" value="{{ loan.status }}" />
+    <input matInput formControlName="status" placeholder="open" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Weight</mat-label>
-    <input matInput placeholder="4.6" value="{{ loan.weight }}" />
+    <input matInput formControlName="weight" placeholder="4.6" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Comment</mat-label>
     <input
       matInput
+      formControlName="comment"
       placeholder="return w/o receipt"
-      value="{{ loan.comment }}"
     />
   </mat-form-field>
+
   <br />
   <button mat-raised-button (click)="openDialog()">Edit Items</button>
   <table mat-table [dataSource]="itemDataSource">
@@ -41,4 +43,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <p *ngIf="loanForm.status === 'INVALID'">
+    Fill all the fields!
+  </p>
+  <button mat-raised-button type="Submit" color="primary">
+    Submit
+  </button>
 </form>

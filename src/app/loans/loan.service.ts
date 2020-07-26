@@ -11,12 +11,13 @@ import { ILoan } from './loan';
 export class LoanService {
   private loansUrl = 'http://localhost:6080/api/loan/get';
   private loanByIdUrl = 'http://localhost:6080/api/loan/getById';
+  private updateUrl = 'http://localhost:6080/api/loan/update';
 
   constructor(private http: HttpClient) {}
 
   getLoans(): Observable<ILoan[]> {
     return this.http.get<ILoan[]>(this.loansUrl).pipe(
-      tap((data) => console.log('All: ' + data))
+      tap((data) => console.log('loanService.getLoans: ' + data))
       // catchError({err:this.handleError})
     );
   }
@@ -25,10 +26,15 @@ export class LoanService {
     return this.http
       .post<ILoan>(this.loanByIdUrl, { id: id })
       .pipe(
-        tap((data) => console.log('LoanById: ' + data))
+        tap((data) => console.log('loanService.getLoanById: ' + data))
         // catchError({err:this.handleError})
       );
   }
 
+  updateLoan(loan: ILoan): Observable<ILoan> {
+    return this.http
+      .put<ILoan>(this.updateUrl, loan)
+      .pipe(tap((data) => console.log('loanService.updateLoan: ' + data)));
+  }
   private handleError(err: HttpErrorResponse) {}
 }
