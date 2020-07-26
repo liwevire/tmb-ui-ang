@@ -54,6 +54,7 @@ export class EditLoanComponent implements OnInit {
         this.loan = loan;
         this.prepareLoanForm(this.loan);
         this.refreshDataSource();
+        this.router.navigate(['/loan/' + this.loan.id]);
       },
     });
   }
@@ -66,16 +67,45 @@ export class EditLoanComponent implements OnInit {
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.loanService.getLoanById(this.id).subscribe({
-      next: (loan) => {
-        this.loan = loan;
-        this.prepareLoanForm(this.loan);
-        this.refreshDataSource();
-      },
-      error: (err) => (this.errorMessage = err),
-    });
+    if (this.id) {
+      this.loanService.getLoanById(this.id).subscribe({
+        next: (loan) => {
+          this.loan = loan;
+          this.prepareLoanForm(this.loan);
+          this.refreshDataSource();
+        },
+        error: (err) => (this.errorMessage = err),
+      });
+    } else {
+      this.loan = { ...emptyLoan };
+      this.prepareLoanForm(this.loan);
+      this.refreshDataSource();
+    }
   }
   refreshDataSource(): void {
     this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);
   }
 }
+
+const emptyLoan = {
+  id: 0,
+  status: 'open',
+  weight: '0',
+  comment: '',
+  activities: [],
+  items: [],
+  statusCode: 0,
+  statusMessage: '',
+  customer: {
+    id: 0,
+    name: '',
+    secondaryName: '',
+    address: '',
+    post: '',
+    pin: '',
+    phone: '',
+    date: new Date(),
+    statusCode: 0,
+    statusMessage: '',
+  },
+};

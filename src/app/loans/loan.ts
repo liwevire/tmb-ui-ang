@@ -7,7 +7,7 @@ export interface ILoan extends IAppStatus {
   id: number;
   status: string;
   weight: string;
-  comment: Date;
+  comment: string;
   customer: ICustomer;
   items: IItem[];
   activities: IActivity[];

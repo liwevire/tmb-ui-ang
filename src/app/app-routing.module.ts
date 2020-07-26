@@ -11,11 +11,11 @@ import { EditCustomerComponent } from './customers/edit-customer/edit-customer.c
 
 const routes: Routes = [
   { path: 'customers', component: CustomerListComponent },
-  { path: 'customer/add', component: AddCustomerComponent },
-  { path: 'customer/edit/:id', component: EditCustomerComponent },
+  { path: 'customer', component: AddCustomerComponent },
+  { path: 'customer/:id', component: EditCustomerComponent },
   { path: 'loans', component: LoanListComponent },
-  { path: 'loan/add', component: AddLoanComponent },
-  { path: 'loan/edit/:id', component: EditLoanComponent },
+  { path: 'loan', component: EditLoanComponent },
+  { path: 'loan/:id', component: EditLoanComponent },
 ];
 
 @NgModule({
