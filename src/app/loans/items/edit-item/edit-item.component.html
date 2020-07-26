@@ -1,11 +1,22 @@
-{{ items }}
-<form [formGroup]="itemForm">
-  <mat-form-field>
-    <mat-label> <h3>Name</h3> </mat-label>
-    <input matInput formControlName="name" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label> <h3>Quantity</h3> </mat-label>
-    <input matInput formControlName="quantity" />
-  </mat-form-field>
-</form>
+<div *ngFor="let item of itemsForm.controls; index as i">
+  <ng-container [formGroup]="item">
+    <mat-form-field>
+      <mat-label> <h3>Item name</h3> </mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label> <h3>Quantity</h3> </mat-label>
+      <input matInput formControlName="quantity" />
+    </mat-form-field>
+    <a mat-raised-button mat-mini-fab (click)="removeItem(i)" color="warn"
+      ><mat-icon>delete</mat-icon></a
+    >
+  </ng-container>
+</div>
+<button mat-raised-button type="Submit" (click)="onSubmit()" color="primary">
+  Submit
+</button>
+<button mat-raised-button (click)="onCancel()" color="warn">Cancel</button>
+<button mat-raised-button (click)="addItem()" color="accent">
+  Add item
+</button>

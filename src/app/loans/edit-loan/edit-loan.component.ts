@@ -17,7 +17,7 @@ export class EditLoanComponent implements OnInit {
   id: number;
   loan: ILoan;
   itemDataSource: any;
-  displayedColumns: string[] = ['id', 'name', 'quantity'];
+  displayedColumns: string[] = ['name', 'quantity'];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,11 +27,13 @@ export class EditLoanComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(EditItemComponent, {
-      width: '250px',
+      width: '540px',
+      height: '90%',
       data: this.loan.items,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.loan.items = result;
       this.refreshDataSource();
       console.log('The dialog was closed');
     });
