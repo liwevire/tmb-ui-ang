@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit()">
+  <div *ngFor="let activity of activitiesForm.controls; index as i">
+    <ng-container [formGroup]="activity">
+      <mat-form-field appearance="fill">
+        <mat-label> <h3>Date</h3> </mat-label>
+        <!-- <input matInput type="date" formControlName="date" /> -->
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+          [calendarHeaderComponent]="calHeader"
+        ></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="principal">Principal</mat-option>
+          <mat-option value="interest">Interest</mat-option>
+          <mat-option value="ipayment">Interest Payment</mat-option>
+          <mat-option value="ipayment">Principal Payment</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label> <h3>Amount</h3> </mat-label>
+        <input matInput formControlName="amount" />
+      </mat-form-field>
+      <a
+        mat-raised-button
+        mat-mini-fab
+        (click)="removeActivity(i)"
+        color="accent"
+        ><mat-icon>delete</mat-icon></a
+      >
+    </ng-container>
+  </div>
+  <p *ngIf="activitiesForm.status === 'INVALID'">
+    Fill all the fields!
+  </p>
+  <button mat-raised-button (click)="onCancel()" color="warn">Cancel</button>
+  <button
+    mat-raised-button
+    type="Submit"
+    color="primary"
+    [disabled]="!activitiesForm.valid"
+  >
+    Update
+  </button>
+  <a mat-raised-button mat-mini-fab (click)="addActivity()" color="accent">
+    <mat-icon>add</mat-icon>
+  </a>
+</form>

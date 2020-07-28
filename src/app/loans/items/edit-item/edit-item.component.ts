@@ -34,7 +34,6 @@ export class EditItemComponent implements OnInit {
     this.itemsForm.removeAt(index);
   }
   onSubmit() {
-    console.log(this.itemsForm.value);
     this.dialogRef.close(this.itemsForm.value);
   }
   onCancel(): void {

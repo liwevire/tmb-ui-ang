@@ -9,9 +9,10 @@ import { ILoan } from './loan';
   providedIn: 'root',
 })
 export class LoanService {
-  private loansUrl = 'http://localhost:6080/api/loan/get';
-  private loanByIdUrl = 'http://localhost:6080/api/loan/getById';
-  private updateUrl = 'http://localhost:6080/api/loan/update';
+  private loansUrl = 'http://192.168.43.41:6080/api/loan/get';
+  private loanByIdUrl = 'http://192.168.43.41:6080/api/loan/getById';
+  private updateUrl = 'http://192.168.43.41:6080/api/loan/update';
+  private deleteUrl = 'http://192.168.43.41:6080/api/loan/delete?id=';
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +36,12 @@ export class LoanService {
     return this.http
       .put<ILoan>(this.updateUrl, loan)
       .pipe(tap((data) => console.log('loanService.updateLoan: ' + data)));
+  }
+
+  deleteLoan(id: number) {
+    return this.http
+      .delete<ILoan>(this.deleteUrl + id)
+      .pipe(tap((data) => console.log('loanService.deleteLoan: ' + data)));
   }
   private handleError(err: HttpErrorResponse) {}
 }

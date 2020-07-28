@@ -9,7 +9,7 @@ import { ICustomer } from './customer';
   providedIn: 'root',
 })
 export class CustomerService {
-  private customerUrl = 'http://localhost:6080/api/customer/get';
+  private customerUrl = 'http://192.168.43.41:6080/api/customer/get';
 
   constructor(private http: HttpClient) {}
 

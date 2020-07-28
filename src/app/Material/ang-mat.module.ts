@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 const modules = [
   CommonModule,
   MatTableModule,
@@ -23,6 +26,8 @@ const modules = [
   MatFormFieldModule,
   MatDialogModule,
   MatIconModule,
+  MatSelectModule,
+  MatDatepickerModule,
 ];
 
 @NgModule({

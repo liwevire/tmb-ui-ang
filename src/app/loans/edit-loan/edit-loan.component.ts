@@ -3,22 +3,60 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { ILoan } from '../loan';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from '@angular/material-moment-adapter';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment } from 'moment';
+
 import { LoanService } from '../loan.service';
 import { EditItemComponent } from '../items/edit-item/edit-item.component';
+import { EditActivityComponent } from '../activities/edit-activity/edit-activity.component';
+import { ILoan } from '../loan';
 import { IItem } from '../item';
+import { IActivity } from '../activity';
+
+const moment = _rollupMoment || _moment;
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-edit-loan',
   templateUrl: './edit-loan.component.html',
   styleUrls: ['./edit-loan.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class EditLoanComponent implements OnInit {
   errorMessage: string;
   id: number;
   loan: ILoan;
   itemDataSource: any;
-  displayedColumns: string[] = ['name', 'quantity'];
+  activityDataSource: any;
+  itemColumns: string[] = ['name', 'quantity'];
+  activityColumns: string[] = ['date', 'category', 'amount'];
   loanForm: FormGroup;
   constructor(
     private route: ActivatedRoute,
@@ -26,17 +64,11 @@ export class EditLoanComponent implements OnInit {
     private loanService: LoanService,
     private fb: FormBuilder,
     public dialog: MatDialog
-  ) {
-    this.loanForm = this.fb.group({
-      status: ['', Validators.required],
-      weight: ['', Validators.required],
-      comment: [''],
-    });
-  }
+  ) {}
 
-  openDialog(): void {
+  openItemDialog(): void {
     const dialogRef = this.dialog.open(EditItemComponent, {
-      width: '540px',
+      width: '450px',
       height: '90%',
       data: this.loan.items,
     });
@@ -44,7 +76,18 @@ export class EditLoanComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) this.loan.items = result;
       this.refreshDataSource();
-      console.log('The dialog was closed');
+    });
+  }
+  openActivityDialog(): void {
+    const dialogRef = this.dialog.open(EditActivityComponent, {
+      width: '700px',
+      height: '90%',
+      data: this.loan.activities,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this.loan.activities = result;
+      this.refreshDataSource();
     });
   }
   onSubmit() {
@@ -58,11 +101,21 @@ export class EditLoanComponent implements OnInit {
       },
     });
   }
+  onDelete() {
+    this.loanService.deleteLoan(this.loan.id).subscribe({
+      next: (loan) => {
+        this.router.navigate(['/loans']);
+      },
+    });
+  }
   prepareLoanForm(loan: ILoan) {
     this.loanForm = this.fb.group({
       status: [loan.status, Validators.required],
       weight: [loan.weight, Validators.required],
       comment: [loan.comment],
+      customer: this.fb.group({
+        id: [loan.customer.id, Validators.required],
+      }),
     });
   }
   ngOnInit(): void {
@@ -84,6 +137,9 @@ export class EditLoanComponent implements OnInit {
   }
   refreshDataSource(): void {
     this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);
+    this.activityDataSource = new MatTableDataSource<IActivity>(
+      this.loan.activities
+    );
   }
 }
 
