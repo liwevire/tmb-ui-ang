@@ -11,7 +11,7 @@ import { EditCustomerComponent } from './customers/edit-customer/edit-customer.c
 
 const routes: Routes = [
   { path: 'customers', component: CustomerListComponent },
-  { path: 'customer', component: AddCustomerComponent },
+  { path: 'customer', component: EditCustomerComponent },
   { path: 'customer/:id', component: EditCustomerComponent },
   { path: 'loans', component: LoanListComponent },
   { path: 'loan', component: EditLoanComponent },

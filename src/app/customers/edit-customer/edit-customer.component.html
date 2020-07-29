@@ -1,1 +1,67 @@
-<p>edit-customer works!</p>
+<p *ngIf="!customer"><br />loading...<br /></p>
+<form *ngIf="customer" (ngSubmit)="onSubmit()" [formGroup]="customerForm">
+  <mat-form-field>
+    <mat-label>Id</mat-label>
+    <input matInput placeholder="126" value="{{ customer.id }}" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" placeholder="Muthu" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Secondary name</mat-label>
+    <input matInput formControlName="secondaryName" placeholder="Muthu" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label> <h3>Date</h3> </mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      #picker
+      [calendarHeaderComponent]="calHeader"
+    ></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <textarea
+      matInput
+      formControlName="address"
+      type="t"
+      placeholder="abc Apartments, main road"
+    ></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Post</mat-label>
+    <input matInput formControlName="post" placeholder="Peravurani" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Pin</mat-label>
+    <input matInput formControlName="pin" type="number" placeholder="614804" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input
+      matInput
+      formControlName="phone"
+      type="tel"
+      placeholder="9876543210"
+    />
+  </mat-form-field>
+
+  <p *ngIf="customerForm.status === 'INVALID'">
+    Fill all the fields!
+  </p>
+  <br />
+  <button
+    mat-raised-button
+    type="Submit"
+    [disabled]="!customerForm.valid"
+    color="primary"
+  >
+    Submit
+  </button>
+  <button mat-raised-button type="button" (click)="onDelete()" color="warn">
+    Delete
+  </button>
+</form>

@@ -85,7 +85,12 @@
     Fill all the fields!
   </p>
   <br />
-  <button mat-raised-button type="Submit" color="primary">
+  <button
+    mat-raised-button
+    type="Submit"
+    [disabled]="!loanForm.valid"
+    color="primary"
+  >
     Submit
   </button>
   <button mat-raised-button type="button" (click)="onDelete()" color="warn">

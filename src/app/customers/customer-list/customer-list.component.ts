@@ -19,8 +19,6 @@ export class CustomerListComponent implements OnInit {
     'id',
     'name',
     'secondaryName',
-    'date',
-    'address',
     'post',
     'pin',
     'phone',
@@ -31,6 +29,10 @@ export class CustomerListComponent implements OnInit {
 
   constructor(private customerService: CustomerService) {}
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ngOnInit(): void {
     this.customerService.getCustomers().subscribe({
       next: (customers) => {

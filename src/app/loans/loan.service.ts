@@ -9,10 +9,10 @@ import { ILoan } from './loan';
   providedIn: 'root',
 })
 export class LoanService {
-  private loansUrl = 'http://192.168.43.41:6080/api/loan/get';
-  private loanByIdUrl = 'http://192.168.43.41:6080/api/loan/getById';
-  private updateUrl = 'http://192.168.43.41:6080/api/loan/update';
-  private deleteUrl = 'http://192.168.43.41:6080/api/loan/delete?id=';
+  private loansUrl = 'http://192.168.43.146:6080/api/loan/get';
+  private loanByIdUrl = 'http://192.168.43.146:6080/api/loan/getById';
+  private updateUrl = 'http://192.168.43.146:6080/api/loan/update';
+  private deleteUrl = 'http://192.168.43.146:6080/api/loan/delete?id=';
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,6 @@ export class LoanService {
       // catchError({err:this.handleError})
     );
   }
-
   getLoanById(id: number): Observable<ILoan> {
     return this.http
       .post<ILoan>(this.loanByIdUrl, { id: id })
@@ -31,13 +30,11 @@ export class LoanService {
         // catchError({err:this.handleError})
       );
   }
-
   updateLoan(loan: ILoan): Observable<ILoan> {
     return this.http
       .put<ILoan>(this.updateUrl, loan)
       .pipe(tap((data) => console.log('loanService.updateLoan: ' + data)));
   }
-
   deleteLoan(id: number) {
     return this.http
       .delete<ILoan>(this.deleteUrl + id)

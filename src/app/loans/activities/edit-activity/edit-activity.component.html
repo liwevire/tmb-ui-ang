@@ -1,9 +1,8 @@
 <form (ngSubmit)="onSubmit()">
   <div *ngFor="let activity of activitiesForm.controls; index as i">
     <ng-container [formGroup]="activity">
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label> <h3>Date</h3> </mat-label>
-        <!-- <input matInput type="date" formControlName="date" /> -->
         <input matInput [matDatepicker]="picker" formControlName="date" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker
@@ -17,7 +16,7 @@
           <mat-option value="principal">Principal</mat-option>
           <mat-option value="interest">Interest</mat-option>
           <mat-option value="ipayment">Interest Payment</mat-option>
-          <mat-option value="ipayment">Principal Payment</mat-option>
+          <mat-option value="ppayment">Principal Payment</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>

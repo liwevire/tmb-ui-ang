@@ -9,7 +9,10 @@ import { ICustomer } from './customer';
   providedIn: 'root',
 })
 export class CustomerService {
-  private customerUrl = 'http://192.168.43.41:6080/api/customer/get';
+  private customerUrl = 'http://192.168.43.146:6080/api/customer/get';
+  private customerByIdUrl = 'http://192.168.43.146:6080/api/customer/getById';
+  private updateUrl = 'http://192.168.43.146:6080/api/customer/update';
+  private deleteUrl = 'http://192.168.43.146:6080/api/customer/delete?id=';
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +21,28 @@ export class CustomerService {
       tap((data) => console.log('All: ' + data))
       // catchError({err:this.handleError})
     );
+  }
+  getCusomterById(id: number): Observable<ICustomer> {
+    return this.http
+      .post<ICustomer>(this.customerByIdUrl, { id: id })
+      .pipe(
+        tap((data) => console.log('customerService.getCusomterById: ' + data))
+        // catchError({err:this.handleError})
+      );
+  }
+  updateCustomer(customer: ICustomer): Observable<ICustomer> {
+    return this.http
+      .put<ICustomer>(this.updateUrl, customer)
+      .pipe(
+        tap((data) => console.log('customerService.updateCustomer: ' + data))
+      );
+  }
+  deleteCustomer(id: number) {
+    return this.http
+      .delete<ICustomer>(this.deleteUrl + id)
+      .pipe(
+        tap((data) => console.log('customerService.deleteCustomer: ' + data))
+      );
   }
 
   private handleError(err: HttpErrorResponse) {}

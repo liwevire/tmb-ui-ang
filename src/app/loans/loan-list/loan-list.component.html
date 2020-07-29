@@ -9,11 +9,13 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer</th>
-      <td mat-cell *matCellDef="let loan">{{ loan.customer.name }}</td>
+      <th mat-header-cell *matHeaderCellDef>Customer</th>
+      <td mat-cell *matCellDef="let loan">
+        {{ loan.customer.name }} - {{ loan.customer.post }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="post">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Post</th>
+      <th mat-header-cell *matHeaderCellDef>Post</th>
       <td mat-cell *matCellDef="let loan">{{ loan.customer.post }}</td>
     </ng-container>
     <ng-container matColumnDef="status">
