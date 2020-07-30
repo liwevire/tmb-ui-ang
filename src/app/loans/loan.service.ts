@@ -26,7 +26,14 @@ export class LoanService {
     return this.http
       .post<ILoan>(this.loanByIdUrl, { id: id })
       .pipe(
-        tap((data) => console.log('loanService.getLoanById: ' + data))
+        tap((data) => {
+          console.log('loanService.getLoanById: ' + data);
+          if (data.activities != null) {
+            data.activities.sort(function (a, b): any {
+              return new Date(a.date).getTime() - new Date(b.date).getTime();
+            });
+          }
+        })
         // catchError({err:this.handleError})
       );
   }

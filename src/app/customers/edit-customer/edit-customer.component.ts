@@ -76,7 +76,6 @@ export class EditCustomerComponent implements OnInit {
     });
   }
   prepareCustomerForm(customer: ICustomer) {
-    customer.date = new Date(customer.date);
     this.customerForm = this.fb.group({
       name: [customer.name, Validators.required],
       secondaryName: [customer.secondaryName, Validators.required],

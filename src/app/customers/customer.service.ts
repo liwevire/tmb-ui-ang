@@ -26,7 +26,10 @@ export class CustomerService {
     return this.http
       .post<ICustomer>(this.customerByIdUrl, { id: id })
       .pipe(
-        tap((data) => console.log('customerService.getCusomterById: ' + data))
+        tap((data) => {
+          console.log('customerService.getCusomterById: ' + data);
+          data.date = new Date(data.date);
+        })
         // catchError({err:this.handleError})
       );
   }

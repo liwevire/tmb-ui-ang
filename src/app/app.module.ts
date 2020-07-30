@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -22,13 +23,14 @@ import { CustomCalendarHeaderComponent } from './shared/custom-calendar-header/c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    AngMatModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MomentDateModule,
+    AppRoutingModule,
+    AngMatModule,
     FormsModule,
     ReactiveFormsModule,
-    MomentDateModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

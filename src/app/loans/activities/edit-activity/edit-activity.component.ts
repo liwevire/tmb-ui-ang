@@ -53,6 +53,9 @@ export class EditActivityComponent implements OnInit {
   ) {
     this.activities.forEach((activity) => {
       activity.date = new Date(activity.date);
+    });
+
+    this.activities.forEach((activity) => {
       const activityGroup = this.fb.group({
         date: [activity.date, Validators.required],
         category: [activity.category, Validators.required],
