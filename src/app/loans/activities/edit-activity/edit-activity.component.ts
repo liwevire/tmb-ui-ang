@@ -52,10 +52,6 @@ export class EditActivityComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.activities.forEach((activity) => {
-      activity.date = new Date(activity.date);
-    });
-
-    this.activities.forEach((activity) => {
       const activityGroup = this.fb.group({
         date: [activity.date, Validators.required],
         category: [activity.category, Validators.required],
@@ -67,7 +63,7 @@ export class EditActivityComponent implements OnInit {
   }
   addActivity() {
     const newActivityGroup = this.fb.group({
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       category: ['', Validators.required],
       amount: ['', Validators.required],
     });

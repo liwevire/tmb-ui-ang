@@ -13,6 +13,7 @@ import { ICustomer } from '../customer';
   styleUrls: ['./customer-list.component.css'],
 })
 export class CustomerListComponent implements OnInit {
+  title = 'Customer list';
   errorMessage: string;
   customers: ICustomer[] = [];
   displayedColumns: string[] = [

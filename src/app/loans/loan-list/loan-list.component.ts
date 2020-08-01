@@ -13,6 +13,7 @@ import { ILoan } from '../loan';
   styleUrls: ['./loan-list.component.css'],
 })
 export class LoanListComponent implements OnInit {
+  title = 'Loan list';
   errorMessage: string;
   loans: ILoan[] = [];
   displayedColumns: string[] = ['id', 'name', 'post', 'status', 'weight'];

@@ -1,9 +1,8 @@
-<p *ngIf="!loan"><br />loading...<br /></p>
+<br />
+<br />
+<h1>{{ title }}</h1>
+<h1 *ngIf="!loan"><br />loading...<br /></h1>
 <form *ngIf="loan" (ngSubmit)="onSubmit()" [formGroup]="loanForm">
-  <mat-form-field>
-    <mat-label>Id</mat-label>
-    <input matInput placeholder="126" value="{{ loan.id }}" />
-  </mat-form-field>
   <div formGroupName="customer">
     <mat-form-field>
       <mat-label>Customer id</mat-label>
@@ -33,7 +32,7 @@
 
   <br />
   <button mat-raised-button type="button" (click)="openItemDialog()">
-    Edit Items
+    Add/Edit Items
   </button>
   <table mat-table [dataSource]="itemDataSource">
     <ng-container matColumnDef="name">
@@ -48,7 +47,7 @@
     <tr mat-row *matRowDef="let row; columns: itemColumns"></tr>
   </table>
   <button mat-raised-button type="button" (click)="openActivityDialog()">
-    Edit Activities
+    Add/Edit Activities
   </button>
   <table mat-table [dataSource]="activityDataSource">
     <ng-container matColumnDef="date">
@@ -71,6 +70,9 @@
         </div>
         <div *ngIf="activity.category === 'ppayment'">
           Principal Payment
+        </div>
+        <div *ngIf="activity.category === 'appraiserFee'">
+          Appraiser fee
         </div>
       </td>
     </ng-container>

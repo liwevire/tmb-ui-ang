@@ -45,6 +45,7 @@ export const MY_FORMATS = {
   ],
 })
 export class EditCustomerComponent implements OnInit {
+  title: string;
   calHeader = CustomCalendarHeaderComponent;
   errorMessage: string;
   id: number;
@@ -93,12 +94,14 @@ export class EditCustomerComponent implements OnInit {
         next: (customer) => {
           this.customer = customer;
           this.prepareCustomerForm(this.customer);
+          this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
         },
         error: (err) => (this.errorMessage = err),
       });
     } else {
       this.customer = { ...emptyCustomer };
       this.prepareCustomerForm(this.customer);
+      this.title = 'New Customer';
     }
   }
 }

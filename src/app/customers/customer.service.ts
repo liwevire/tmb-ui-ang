@@ -28,7 +28,6 @@ export class CustomerService {
       .pipe(
         tap((data) => {
           console.log('customerService.getCusomterById: ' + data);
-          data.date = new Date(data.date);
         })
         // catchError({err:this.handleError})
       );

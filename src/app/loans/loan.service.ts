@@ -28,11 +28,6 @@ export class LoanService {
       .pipe(
         tap((data) => {
           console.log('loanService.getLoanById: ' + data);
-          if (data.activities != null) {
-            data.activities.sort(function (a, b): any {
-              return new Date(a.date).getTime() - new Date(b.date).getTime();
-            });
-          }
         })
         // catchError({err:this.handleError})
       );

@@ -21,7 +21,7 @@ import { EditItemComponent } from '../items/edit-item/edit-item.component';
 import { EditActivityComponent } from '../activities/edit-activity/edit-activity.component';
 import { ILoan } from '../loan';
 import { IItem } from '../item';
-import { IActivity } from '../activity';
+import { IActivity, activitySortByDate } from '../activity';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -50,6 +50,7 @@ export const MY_FORMATS = {
   ],
 })
 export class EditLoanComponent implements OnInit {
+  title: string;
   errorMessage: string;
   id: number;
   loan: ILoan;
@@ -118,6 +119,12 @@ export class EditLoanComponent implements OnInit {
       }),
     });
   }
+  refreshDataSource(): void {
+    this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);
+    this.activityDataSource = new MatTableDataSource<IActivity>(
+      this.loan.activities
+    );
+  }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
@@ -126,6 +133,8 @@ export class EditLoanComponent implements OnInit {
           this.loan = loan;
           this.prepareLoanForm(this.loan);
           this.refreshDataSource();
+          activitySortByDate(this.loan.activities);
+          this.title = 'Edit Loan | LoanID: ' + this.loan.id;
         },
         error: (err) => (this.errorMessage = err),
       });
@@ -133,13 +142,8 @@ export class EditLoanComponent implements OnInit {
       this.loan = { ...emptyLoan };
       this.prepareLoanForm(this.loan);
       this.refreshDataSource();
+      this.title = 'New Loan';
     }
-  }
-  refreshDataSource(): void {
-    this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);
-    this.activityDataSource = new MatTableDataSource<IActivity>(
-      this.loan.activities
-    );
   }
 }
 
@@ -148,8 +152,24 @@ const emptyLoan = {
   status: 'open',
   weight: '0',
   comment: '',
-  activities: [],
-  items: [],
+  activities: [
+    {
+      amount: '0',
+      category: 'principal',
+      date: new Date(),
+    },
+    {
+      amount: '15',
+      category: 'appraiserFee',
+      date: new Date(),
+    },
+  ],
+  items: [
+    {
+      name: '',
+      quantity: 0,
+    },
+  ],
   statusCode: 0,
   statusMessage: '',
   customer: {
