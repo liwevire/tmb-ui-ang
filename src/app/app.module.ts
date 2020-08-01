@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { EditItemComponent } from './loans/items/edit-item/edit-item.component';
 import { EditActivityComponent } from './loans/activities/edit-activity/edit-activity.component';
 import { CustomCalendarHeaderComponent } from './shared/custom-calendar-header/custom-calendar-header.component';
+import { CustomerLoanListComponent } from './customers/customer-loan-list/customer-loan-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CustomCalendarHeaderComponent } from './shared/custom-calendar-header/c
     EditItemComponent,
     EditActivityComponent,
     CustomCalendarHeaderComponent,
+    CustomerLoanListComponent,
   ],
   imports: [
     BrowserModule,

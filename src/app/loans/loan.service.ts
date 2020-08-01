@@ -10,6 +10,8 @@ import { ILoan } from './loan';
 })
 export class LoanService {
   private loansUrl = 'http://192.168.43.146:6080/api/loan/get';
+  private loansByCustomerUrl =
+    'http://192.168.43.146:6080/api/loan/getByCustomerId';
   private loanByIdUrl = 'http://192.168.43.146:6080/api/loan/getById';
   private updateUrl = 'http://192.168.43.146:6080/api/loan/update';
   private deleteUrl = 'http://192.168.43.146:6080/api/loan/delete?id=';
@@ -22,6 +24,16 @@ export class LoanService {
       // catchError({err:this.handleError})
     );
   }
+
+  getLoansByCustomerId(id: number): Observable<ILoan[]> {
+    return this.http
+      .post<ILoan[]>(this.loansByCustomerUrl, { id: id })
+      .pipe(
+        tap((data) => console.log('loanService.getLoansByCustomerId: ' + data))
+        // catchError({err:this.handleError})
+      );
+  }
+
   getLoanById(id: number): Observable<ILoan> {
     return this.http
       .post<ILoan>(this.loanByIdUrl, { id: id })
