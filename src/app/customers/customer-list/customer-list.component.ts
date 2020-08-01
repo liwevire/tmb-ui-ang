@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CustomerService } from '../customer.service';
 import { ICustomer } from '../customer';
@@ -14,7 +15,6 @@ import { ICustomer } from '../customer';
 })
 export class CustomerListComponent implements OnInit {
   title = 'Customer list';
-  errorMessage: string;
   customers: ICustomer[] = [];
   displayedColumns: string[] = [
     'id',
@@ -28,7 +28,10 @@ export class CustomerListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private customerService: CustomerService) {}
+  constructor(
+    private customerService: CustomerService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -42,7 +45,11 @@ export class CustomerListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      error: (err) => (this.errorMessage = err),
+      error: (err) => {
+        this._snackBar.open('ERROR!', 'Close', {
+          duration: 3000,
+        });
+      },
     });
   }
 }

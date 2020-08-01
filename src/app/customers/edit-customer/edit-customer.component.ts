@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -17,6 +18,7 @@ import { default as _rollupMoment } from 'moment';
 import { CustomCalendarHeaderComponent } from '../../shared/custom-calendar-header/custom-calendar-header.component';
 import { CustomerService } from '../customer.service';
 import { ICustomer } from '../customer';
+import { checkStatus } from '../../util/apiUtil';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -57,7 +59,8 @@ export class EditCustomerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private customerService: CustomerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   onSubmit() {
@@ -66,14 +69,32 @@ export class EditCustomerComponent implements OnInit {
       next: (customer) => {
         this.customer = customer;
         this.prepareCustomerForm(this.customer);
+        if (checkStatus(this.customer))
+          this._snackBar.open(checkStatus(this.customer), 'Close', {
+            duration: 3000,
+          });
         this.router.navigate(['/customer/' + this.customer.id]);
+      },
+      error: (err) => {
+        this._snackBar.open('ERROR!', 'Close', {
+          duration: 3000,
+        });
       },
     });
   }
   onDelete() {
     this.customerService.deleteCustomer(this.customer.id).subscribe({
       next: (customer) => {
+        if (checkStatus(this.customer))
+          this._snackBar.open(checkStatus(this.customer), 'Close', {
+            duration: 3000,
+          });
         this.router.navigate(['/customers']);
+      },
+      error: (err) => {
+        this._snackBar.open('ERROR!', 'Close', {
+          duration: 3000,
+        });
       },
     });
   }

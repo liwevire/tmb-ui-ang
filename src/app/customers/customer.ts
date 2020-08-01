@@ -8,6 +8,4 @@ export interface ICustomer extends IAppStatus {
   post: string;
   pin: string;
   phone: string;
-  statusCode: number;
-  statusMessage: string;
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -22,6 +23,7 @@ import { EditActivityComponent } from '../activities/edit-activity/edit-activity
 import { ILoan } from '../loan';
 import { IItem } from '../item';
 import { IActivity, activitySortByDate } from '../activity';
+import { checkStatus } from '../../util/apiUtil';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -64,6 +66,7 @@ export class EditLoanComponent implements OnInit {
     private router: Router,
     private loanService: LoanService,
     private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {}
 
@@ -98,14 +101,32 @@ export class EditLoanComponent implements OnInit {
         this.loan = loan;
         this.prepareLoanForm(this.loan);
         this.refreshDataSource();
+        if (checkStatus(this.loan))
+          this._snackBar.open(checkStatus(this.loan), 'Close', {
+            duration: 3000,
+          });
         this.router.navigate(['/loan/' + this.loan.id]);
+      },
+      error: (err) => {
+        this._snackBar.open('ERROR!', 'Close', {
+          duration: 3000,
+        });
       },
     });
   }
   onDelete() {
     this.loanService.deleteLoan(this.loan.id).subscribe({
       next: (loan) => {
+        if (checkStatus(this.loan))
+          this._snackBar.open(checkStatus(this.loan), 'Close', {
+            duration: 3000,
+          });
         this.router.navigate(['/loans']);
+      },
+      error: (err) => {
+        this._snackBar.open('ERROR!', 'Close', {
+          duration: 3000,
+        });
       },
     });
   }
@@ -124,6 +145,11 @@ export class EditLoanComponent implements OnInit {
     this.activityDataSource = new MatTableDataSource<IActivity>(
       this.loan.activities
     );
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];

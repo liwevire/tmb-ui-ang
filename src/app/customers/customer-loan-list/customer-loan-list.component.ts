@@ -13,7 +13,6 @@ import { ILoan } from '../../loans/loan';
 })
 export class CustomerLoanListComponent implements OnInit {
   @Input() id: number;
-  errorMessage: string;
   loans: ILoan[] = [];
   displayedColumns: string[] = ['id', 'status', 'weight'];
   dataSource: any;
@@ -28,7 +27,6 @@ export class CustomerLoanListComponent implements OnInit {
         this.dataSource = new MatTableDataSource<ILoan>(this.loans);
         this.dataSource.sort = this.sort;
       },
-      error: (err) => (this.errorMessage = err),
     });
   }
 }
