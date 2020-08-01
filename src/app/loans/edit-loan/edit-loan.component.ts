@@ -103,13 +103,13 @@ export class EditLoanComponent implements OnInit {
         this.refreshDataSource();
         if (checkStatus(this.loan))
           this._snackBar.open(checkStatus(this.loan), 'Close', {
-            duration: 3000,
+            duration: 5000,
           });
         this.router.navigate(['/loan/' + this.loan.id]);
       },
       error: (err) => {
         this._snackBar.open('ERROR!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });
@@ -117,15 +117,15 @@ export class EditLoanComponent implements OnInit {
   onDelete() {
     this.loanService.deleteLoan(this.loan.id).subscribe({
       next: (loan) => {
-        if (checkStatus(this.loan))
-          this._snackBar.open(checkStatus(this.loan), 'Close', {
-            duration: 3000,
+        if (checkStatus(loan))
+          this._snackBar.open(checkStatus(loan), 'Close', {
+            duration: 5000,
           });
         this.router.navigate(['/loans']);
       },
       error: (err) => {
         this._snackBar.open('ERROR!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });
@@ -148,7 +148,7 @@ export class EditLoanComponent implements OnInit {
   }
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 5000,
     });
   }
   ngOnInit(): void {

@@ -37,7 +37,7 @@ export class LoanListComponent implements OnInit {
       },
       error: (err) => {
         this._snackBar.open('ERROR!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });

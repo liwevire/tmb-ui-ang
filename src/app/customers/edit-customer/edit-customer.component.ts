@@ -71,13 +71,13 @@ export class EditCustomerComponent implements OnInit {
         this.prepareCustomerForm(this.customer);
         if (checkStatus(this.customer))
           this._snackBar.open(checkStatus(this.customer), 'Close', {
-            duration: 3000,
+            duration: 5000,
           });
         this.router.navigate(['/customer/' + this.customer.id]);
       },
       error: (err) => {
         this._snackBar.open('ERROR!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });
@@ -85,15 +85,15 @@ export class EditCustomerComponent implements OnInit {
   onDelete() {
     this.customerService.deleteCustomer(this.customer.id).subscribe({
       next: (customer) => {
-        if (checkStatus(this.customer))
-          this._snackBar.open(checkStatus(this.customer), 'Close', {
-            duration: 3000,
+        if (checkStatus(customer))
+          this._snackBar.open(checkStatus(customer), 'Close', {
+            duration: 5000,
           });
         this.router.navigate(['/customers']);
       },
       error: (err) => {
         this._snackBar.open('ERROR!', 'Close', {
-          duration: 3000,
+          duration: 5000,
         });
       },
     });
