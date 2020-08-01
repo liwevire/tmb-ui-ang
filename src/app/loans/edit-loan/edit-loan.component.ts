@@ -154,11 +154,15 @@ const emptyLoan = {
   comment: '',
   activities: [
     {
+      id: 0,
+      loanId: 0,
       amount: '0',
       category: 'principal',
       date: new Date(),
     },
     {
+      id: 0,
+      loanId: 0,
       amount: '15',
       category: 'appraiserFee',
       date: new Date(),
@@ -166,8 +170,10 @@ const emptyLoan = {
   ],
   items: [
     {
+      id: 0,
+      loanId: 0,
       name: '',
-      quantity: 0,
+      quantity: '',
     },
   ],
   statusCode: 0,
