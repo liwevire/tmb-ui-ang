@@ -10,6 +10,8 @@ import { tap } from 'rxjs/operators';
 export class KycService {
   private updateCustomerPhotoUrl =
     'http://192.168.43.146:6080/api/kyc/customerphoto/update';
+  private getCustomerPhotoUrl =
+    'http://192.168.43.146:6080/api/kyc/customerphoto/getById?id=';
 
   constructor(private http: HttpClient) {}
 
@@ -19,5 +21,8 @@ export class KycService {
       .pipe(
         tap((data) => console.log('kycService.updateCustomerPhoto: ' + data))
       );
+  }
+  getCustomerPhoto(id: number): Observable<IAppStatus> {
+    return this.http.get<any>(this.getCustomerPhotoUrl + id);
   }
 }

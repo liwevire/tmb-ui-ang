@@ -64,11 +64,27 @@
     Delete
   </button>
 </form>
+<br />
+<div *ngIf="titleLoanList">
+  <app-customer-loan-list [id]="customer.id"></app-customer-loan-list>
+</div>
+<br />
+<img [src]="kycCustomerPhotoUrl" *ngIf="kycCustomerPhotoUrl" />
+<div *ngIf="!showWebcamPanel">
+  <button
+    mat-raised-button
+    type="button"
+    (click)="toggleWebcam(true)"
+    color="primary"
+  >
+    Open Webcam
+  </button>
+</div>
 <app-capture-customer-photo
   (pictureTaken)="handleImage($event)"
-  *ngIf="!webcamImage && titleLoanList"
+  *ngIf="showWebcamPanel && !webcamImage && titleLoanList"
 ></app-capture-customer-photo>
-<div class="snapshot" *ngIf="webcamImage">
+<div class="snapshot" *ngIf="showWebcamPanel && webcamImage">
   <img [src]="webcamImage.imageAsDataUrl" />
   <div>
     <button
@@ -91,7 +107,13 @@
     </button>
   </div>
 </div>
-<br />
-<div *ngIf="titleLoanList">
-  <app-customer-loan-list [id]="customer.id"></app-customer-loan-list>
+<div *ngIf="showWebcamPanel">
+  <button
+    mat-raised-button
+    type="button"
+    (click)="toggleWebcam(false)"
+    color="warn"
+  >
+    Close Webcam
+  </button>
 </div>

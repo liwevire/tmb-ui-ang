@@ -52,7 +52,9 @@ export const MY_FORMATS = {
 })
 export class EditCustomerComponent implements OnInit {
   // latest snapshot
+  kycCustomerPhotoUrl: string;
   webcamImage: WebcamImage = null;
+  showWebcamPanel: boolean = false;
   title: string;
   titleLoanList: string;
   calHeader = CustomCalendarHeaderComponent;
@@ -74,6 +76,9 @@ export class EditCustomerComponent implements OnInit {
   }
   clearImage() {
     this.webcamImage = null;
+  }
+  toggleWebcam(flag: boolean) {
+    this.showWebcamPanel = flag;
   }
   onSubmit() {
     this.customer = { ...this.customer, ...this.customerForm.value };
@@ -122,7 +127,7 @@ export class EditCustomerComponent implements OnInit {
             this._snackBar.open(checkApiResponse(apiStatus), 'Close', {
               duration: 5000,
             });
-          this.router.navigate(['/customer/' + this.customer.id]);
+          window.location.reload();
         },
         error: (err) => {
           this._snackBar.open('ERROR!', 'Close', {
@@ -151,6 +156,9 @@ export class EditCustomerComponent implements OnInit {
           this.prepareCustomerForm(this.customer);
           this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
           this.titleLoanList = 'titleLoanList';
+          this.kycCustomerPhotoUrl =
+            'http://192.168.43.146:6080/api/kyc/customerphoto/getById?id=' +
+            customer.id;
         },
         error: (err) => {
           this._snackBar.open('ERROR!', 'Close', {
