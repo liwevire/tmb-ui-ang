@@ -6,7 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { LoanService } from '../loan.service';
-import { ILoan } from '../loan';
+import { ILoan, getPrincipalActivity } from '../loan';
+import { IActivity } from '../activity';
 
 @Component({
   selector: 'app-loan-list',
@@ -17,7 +18,15 @@ export class LoanListComponent implements OnInit {
   title = 'Loan list';
   errorMessage: string;
   loans: ILoan[] = [];
-  displayedColumns: string[] = ['id', 'name', 'post', 'status', 'weight'];
+  displayedColumns: string[] = [
+    'id',
+    'date',
+    'name',
+    'post',
+    'principal',
+    'status',
+    'weight',
+  ];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -27,6 +36,9 @@ export class LoanListComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
+  getPrincipalActivity(activities: IActivity[]): IActivity {
+    return getPrincipalActivity(activities) as IActivity;
+  }
   ngOnInit(): void {
     this.loanService.getLoans().subscribe({
       next: (loans) => {

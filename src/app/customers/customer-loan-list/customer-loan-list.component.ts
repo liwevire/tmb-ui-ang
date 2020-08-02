@@ -4,7 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
 import { LoanService } from '../../loans/loan.service';
-import { ILoan } from '../../loans/loan';
+import { ILoan, getPrincipalActivity } from '../../loans/loan';
+import { IActivity } from 'src/app/loans/activity';
 
 @Component({
   selector: 'app-customer-loan-list',
@@ -14,12 +15,15 @@ import { ILoan } from '../../loans/loan';
 export class CustomerLoanListComponent implements OnInit {
   @Input() id: number;
   loans: ILoan[] = [];
-  displayedColumns: string[] = ['id', 'status', 'weight'];
+  displayedColumns: string[] = ['id', 'date', 'principal', 'status', 'weight'];
   dataSource: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private loanService: LoanService) {}
 
+  getPrincipalActivity(activities: IActivity[]): IActivity {
+    return getPrincipalActivity(activities) as IActivity;
+  }
   ngOnInit(): void {
     this.loanService.getLoansByCustomerId(this.id).subscribe({
       next: (loans) => {

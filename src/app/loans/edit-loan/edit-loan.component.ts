@@ -23,7 +23,7 @@ import { EditActivityComponent } from '../activities/edit-activity/edit-activity
 import { ILoan } from '../loan';
 import { IItem } from '../item';
 import { IActivity, activitySortByDate } from '../activity';
-import { checkStatus } from '../../util/apiUtil';
+import { checkApiResponse } from '../../util/apiUtil';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -53,7 +53,6 @@ export const MY_FORMATS = {
 })
 export class EditLoanComponent implements OnInit {
   title: string;
-  errorMessage: string;
   id: number;
   loan: ILoan;
   itemDataSource: any;
@@ -101,8 +100,8 @@ export class EditLoanComponent implements OnInit {
         this.loan = loan;
         this.prepareLoanForm(this.loan);
         this.refreshDataSource();
-        if (checkStatus(this.loan))
-          this._snackBar.open(checkStatus(this.loan), 'Close', {
+        if (checkApiResponse(this.loan))
+          this._snackBar.open(checkApiResponse(this.loan), 'Close', {
             duration: 5000,
           });
         this.router.navigate(['/loan/' + this.loan.id]);
@@ -117,8 +116,8 @@ export class EditLoanComponent implements OnInit {
   onDelete() {
     this.loanService.deleteLoan(this.loan.id).subscribe({
       next: (loan) => {
-        if (checkStatus(loan))
-          this._snackBar.open(checkStatus(loan), 'Close', {
+        if (checkApiResponse(loan))
+          this._snackBar.open(checkApiResponse(loan), 'Close', {
             duration: 5000,
           });
         this.router.navigate(['/loans']);
@@ -162,7 +161,11 @@ export class EditLoanComponent implements OnInit {
           activitySortByDate(this.loan.activities);
           this.title = 'Edit Loan | LoanID: ' + this.loan.id;
         },
-        error: (err) => (this.errorMessage = err),
+        error: (err) => {
+          this._snackBar.open('ERROR!', 'Close', {
+            duration: 5000,
+          });
+        },
       });
     } else {
       this.loan = { ...emptyLoan };

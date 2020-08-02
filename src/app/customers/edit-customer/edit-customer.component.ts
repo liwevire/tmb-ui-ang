@@ -18,7 +18,7 @@ import { default as _rollupMoment } from 'moment';
 import { CustomCalendarHeaderComponent } from '../../shared/custom-calendar-header/custom-calendar-header.component';
 import { CustomerService } from '../customer.service';
 import { ICustomer } from '../customer';
-import { checkStatus } from '../../util/apiUtil';
+import { checkApiResponse } from '../../util/apiUtil';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -50,7 +50,6 @@ export class EditCustomerComponent implements OnInit {
   title: string;
   titleLoanList: string;
   calHeader = CustomCalendarHeaderComponent;
-  errorMessage: string;
   id: number;
   customer: ICustomer;
   customerForm: FormGroup;
@@ -69,8 +68,8 @@ export class EditCustomerComponent implements OnInit {
       next: (customer) => {
         this.customer = customer;
         this.prepareCustomerForm(this.customer);
-        if (checkStatus(this.customer))
-          this._snackBar.open(checkStatus(this.customer), 'Close', {
+        if (checkApiResponse(this.customer))
+          this._snackBar.open(checkApiResponse(this.customer), 'Close', {
             duration: 5000,
           });
         this.router.navigate(['/customer/' + this.customer.id]);
@@ -85,8 +84,8 @@ export class EditCustomerComponent implements OnInit {
   onDelete() {
     this.customerService.deleteCustomer(this.customer.id).subscribe({
       next: (customer) => {
-        if (checkStatus(customer))
-          this._snackBar.open(checkStatus(customer), 'Close', {
+        if (checkApiResponse(customer))
+          this._snackBar.open(checkApiResponse(customer), 'Close', {
             duration: 5000,
           });
         this.router.navigate(['/customers']);
@@ -119,7 +118,11 @@ export class EditCustomerComponent implements OnInit {
           this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
           this.titleLoanList = 'titleLoanList';
         },
-        error: (err) => (this.errorMessage = err),
+        error: (err) => {
+          this._snackBar.open('ERROR!', 'Close', {
+            duration: 5000,
+          });
+        },
       });
     } else {
       this.customer = { ...emptyCustomer };

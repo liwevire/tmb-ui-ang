@@ -12,3 +12,10 @@ export interface ILoan extends IAppStatus {
   items: IItem[];
   activities: IActivity[];
 }
+
+export function getPrincipalActivity(activities: IActivity[]) {
+  activities = activities.filter(
+    (activity) => activity.category == 'principal'
+  );
+  if (activities.length == 1) return activities[0];
+}
