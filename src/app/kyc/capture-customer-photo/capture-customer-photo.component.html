@@ -1,0 +1,35 @@
+<webcam
+  [height]="600"
+  [width]="600"
+  [trigger]="triggerObservable"
+  (imageCapture)="handleImage($event)"
+  *ngIf="showWebcam"
+  [allowCameraSwitch]="allowCameraSwitch"
+  [switchCamera]="nextWebcamObservable"
+  [videoOptions]="videoOptions"
+  (cameraSwitched)="cameraWasSwitched($event)"
+  (initError)="handleInitError($event)"
+></webcam>
+<div>
+  <a
+    mat-raised-button
+    mat-mini-fab
+    class="actionBtn"
+    (click)="triggerSnapshot()"
+    title="Take Picture"
+    color="accent"
+    ><mat-icon>photo_camera</mat-icon></a
+  >
+  <a
+    mat-raised-button
+    mat-mini-fab
+    class="actionBtn"
+    (click)="showNextWebcam(true)"
+    title="Switch Camera"
+    ><mat-icon>switch_camera</mat-icon></a
+  >
+</div>
+<h4 *ngIf="errors.length > 0">Messages:</h4>
+<ul *ngFor="let error of errors">
+  <li>{{ error | json }}</li>
+</ul>

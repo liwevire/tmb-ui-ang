@@ -14,11 +14,15 @@ import {
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment } from 'moment';
+import { WebcamImage } from 'ngx-webcam';
 
 import { CustomCalendarHeaderComponent } from '../../shared/custom-calendar-header/custom-calendar-header.component';
 import { CustomerService } from '../customer.service';
+import { KycService } from '../../kyc/kyc.service';
 import { ICustomer } from '../customer';
 import { checkApiResponse } from '../../util/apiUtil';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { IAppStatus } from 'src/app/AppStatus';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -47,21 +51,30 @@ export const MY_FORMATS = {
   ],
 })
 export class EditCustomerComponent implements OnInit {
+  // latest snapshot
+  webcamImage: WebcamImage = null;
   title: string;
   titleLoanList: string;
   calHeader = CustomCalendarHeaderComponent;
   id: number;
   customer: ICustomer;
   customerForm: FormGroup;
+  percentDone: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private customerService: CustomerService,
+    private kycService: KycService,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar
   ) {}
-
+  handleImage(webcamImage: WebcamImage) {
+    this.webcamImage = webcamImage;
+  }
+  clearImage() {
+    this.webcamImage = null;
+  }
   onSubmit() {
     this.customer = { ...this.customer, ...this.customerForm.value };
     this.customerService.updateCustomer(this.customer).subscribe({
@@ -96,6 +109,27 @@ export class EditCustomerComponent implements OnInit {
         });
       },
     });
+  }
+  onSavePhoto() {
+    this.kycService
+      .updateCustomerPhoto({
+        id: this.customer.id,
+        data: this.webcamImage.imageAsBase64,
+      })
+      .subscribe({
+        next: (apiStatus) => {
+          if (checkApiResponse(apiStatus))
+            this._snackBar.open(checkApiResponse(apiStatus), 'Close', {
+              duration: 5000,
+            });
+          this.router.navigate(['/customer/' + this.customer.id]);
+        },
+        error: (err) => {
+          this._snackBar.open('ERROR!', 'Close', {
+            duration: 5000,
+          });
+        },
+      });
   }
   prepareCustomerForm(customer: ICustomer) {
     this.customerForm = this.fb.group({
