@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 const modules = [
   CommonModule,
@@ -30,6 +31,7 @@ const modules = [
   MatSelectModule,
   MatDatepickerModule,
   MatSnackBarModule,
+  MatCardModule,
 ];
 
 @NgModule({
