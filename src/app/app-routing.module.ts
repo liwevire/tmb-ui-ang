@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CustomersComponent } from './customers/customers.component';
-import { LoansComponent } from './loans/loans.component';
 import { CustomerListComponent } from './customers/customer-list/customer-list.component';
 import { LoanListComponent } from './loans/loan-list/loan-list.component';
 import { AddLoanComponent } from './loans/add-loan/add-loan.component';
@@ -24,11 +22,9 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 export const routingComponents = [
-  CustomersComponent,
   CustomerListComponent,
   AddCustomerComponent,
   EditCustomerComponent,
-  LoansComponent,
   LoanListComponent,
   AddLoanComponent,
   EditLoanComponent,
