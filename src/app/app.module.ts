@@ -10,6 +10,7 @@ import { WebcamModule } from 'ngx-webcam';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AngMatModule } from './Material/ang-mat.module';
 import { AppComponent } from './app.component';
+import { Globals } from './util/globals';
 import { EditItemComponent } from './loans/items/edit-item/edit-item.component';
 import { EditActivityComponent } from './loans/activities/edit-activity/edit-activity.component';
 import { CustomCalendarHeaderComponent } from './shared/custom-calendar-header/custom-calendar-header.component';
@@ -38,7 +39,7 @@ import { CaptureCustomerPhotoComponent } from './kyc/capture-customer-photo/capt
     FlexLayoutModule,
     WebcamModule,
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
