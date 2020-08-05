@@ -15,6 +15,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 const modules = [
   CommonModule,
@@ -32,6 +35,9 @@ const modules = [
   MatDatepickerModule,
   MatSnackBarModule,
   MatCardModule,
+  MatToolbarModule,
+  MatListModule,
+  MatMenuModule,
 ];
 
 @NgModule({

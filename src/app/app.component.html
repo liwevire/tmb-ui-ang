@@ -1,9 +1,9 @@
-<div class="mat-app-background basic-container">
-  <section>
-    <a mat-raised-button routerLink="/loans">Loans</a>
-    <a mat-raised-button routerLink="/loan">Loan-Add</a>
-    <a mat-raised-button routerLink="/customers">Customers</a>
-    <a mat-raised-button routerLink="/customer">Customer-Add</a>
-    <router-outlet></router-outlet>
-  </section>
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/loans">Loans</button>
+  <button mat-button routerLink="/loan">Loan-Add</button>
+  <button mat-button routerLink="/customers">Customers</button>
+  <button mat-button routerLink="/customer">Customer-Add</button>
+</mat-toolbar>
+<div class="basic-container">
+  <router-outlet></router-outlet>
 </div>

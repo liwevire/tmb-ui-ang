@@ -8,14 +8,20 @@
         }}</a>
       </td>
     </ng-container>
+    <ng-container matColumnDef="altId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Loan Id - alt</th>
+      <td mat-cell *matCellDef="let loan">
+        {{ loan.altId }}
+      </td>
+    </ng-container>
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <th mat-header-cell *matHeaderCellDef>Date</th>
       <td mat-cell *matCellDef="let loan">
         {{ getPrincipalActivity(loan.activities)?.date | date: "mediumDate" }}
       </td>
     </ng-container>
     <ng-container matColumnDef="principal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Principal</th>
+      <th mat-header-cell *matHeaderCellDef>Principal</th>
       <td mat-cell *matCellDef="let loan">
         {{ getPrincipalActivity(loan.activities)?.amount }}
       </td>

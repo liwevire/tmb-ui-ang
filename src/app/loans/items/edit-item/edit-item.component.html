@@ -1,32 +1,43 @@
+<mat-card-header>
+  <mat-card-title>Add/Edit Items</mat-card-title>
+</mat-card-header>
+
 <form (ngSubmit)="onSubmit()">
-  <div *ngFor="let item of itemsForm.controls; index as i">
-    <ng-container [formGroup]="item">
-      <mat-form-field>
-        <mat-label> <h3>Item name</h3> </mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label> <h3>Quantity</h3> </mat-label>
-        <input matInput type="number" formControlName="quantity" />
-      </mat-form-field>
-      <a mat-raised-button mat-mini-fab (click)="removeItem(i)" color="accent"
-        ><mat-icon>delete</mat-icon></a
-      >
-    </ng-container>
-  </div>
+  <mat-card-content>
+    <div *ngFor="let item of itemsForm.controls; index as i">
+      <ng-container [formGroup]="item">
+        <mat-form-field>
+          <mat-label> <h3>Item name</h3> </mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label> <h3>Quantity</h3> </mat-label>
+          <input matInput type="number" formControlName="quantity" />
+        </mat-form-field>
+        <a mat-raised-button mat-mini-fab (click)="removeItem(i)" color="accent"
+          ><mat-icon>delete</mat-icon></a
+        >
+      </ng-container>
+    </div>
+  </mat-card-content>
   <p *ngIf="itemsForm.status === 'INVALID'">
     Fill all the fields!
   </p>
-  <button mat-raised-button (click)="onCancel()" color="warn">Cancel</button>
-  <button
-    mat-raised-button
-    type="Submit"
-    color="primary"
-    [disabled]="!itemsForm.valid"
-  >
-    Update
-  </button>
-  <a mat-raised-button mat-mini-fab (click)="addItem()" color="accent">
-    <mat-icon>add</mat-icon>
-  </a>
+
+  <mat-card-actions>
+    <button mat-raised-button (click)="onCancel()" color="warn">
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      type="Submit"
+      color="primary"
+      [disabled]="!itemsForm.valid"
+    >
+      Update
+    </button>
+    <a mat-raised-button mat-mini-fab (click)="addItem()" color="accent">
+      <mat-icon>add</mat-icon>
+    </a>
+  </mat-card-actions>
 </form>

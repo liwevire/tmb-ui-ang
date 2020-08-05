@@ -15,7 +15,14 @@ import { IActivity } from 'src/app/loans/activity';
 export class CustomerLoanListComponent implements OnInit {
   @Input() id: number;
   loans: ILoan[] = [];
-  displayedColumns: string[] = ['id', 'date', 'principal', 'status', 'weight'];
+  displayedColumns: string[] = [
+    'id',
+    'altId',
+    'date',
+    'principal',
+    'status',
+    'weight',
+  ];
   dataSource: any;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

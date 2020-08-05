@@ -1,5 +1,3 @@
-<br />
-<br />
 <h1>{{ title }}</h1>
 <h1 *ngIf="!dataSource"><br />loading...<br /></h1>
 <div class="mat-elevation-z6">
@@ -11,6 +9,10 @@
           loan.id
         }}</a>
       </td>
+    </ng-container>
+    <ng-container matColumnDef="altId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Alt id</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.altId }}</td>
     </ng-container>
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Date</th>
@@ -41,6 +43,10 @@
     <ng-container matColumnDef="weight">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
       <td mat-cell *matCellDef="let loan">{{ loan.weight }}</td>
+    </ng-container>
+    <ng-container matColumnDef="comment">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Comment</th>
+      <td mat-cell *matCellDef="let loan">{{ loan.comment }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

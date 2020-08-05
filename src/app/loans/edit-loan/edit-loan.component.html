@@ -1,101 +1,151 @@
-<br />
-<br />
-<h1>{{ title }}</h1>
-<h1 *ngIf="!loan"><br />loading...<br /></h1>
-<form *ngIf="loan" (ngSubmit)="onSubmit()" [formGroup]="loanForm">
-  <div formGroupName="customer">
-    <mat-form-field>
-      <mat-label>Customer id</mat-label>
-      <input matInput placeholder="5" formControlName="id" type="number" />
-    </mat-form-field>
-  </div>
-  <mat-form-field>
-    <mat-label>Status</mat-label>
-    <mat-select formControlName="status">
-      <mat-option value="open">Open</mat-option>
-      <mat-option value="closed">Closed</mat-option>
-      <mat-option value="other">Other</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Weight</mat-label>
-    <input matInput formControlName="weight" type="number" placeholder="4.6" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Comment</mat-label>
-    <input
-      matInput
-      formControlName="comment"
-      placeholder="return w/o receipt"
-    />
-  </mat-form-field>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ title }}
+      <span *ngIf="!loan"><br />loading...<br /></span>
+    </mat-card-title>
+  </mat-card-header>
 
-  <br />
-  <button mat-raised-button type="button" (click)="openItemDialog()">
-    Add/Edit Items
-  </button>
-  <table mat-table [dataSource]="itemDataSource">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let item">{{ item.name }}</td>
-    </ng-container>
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef>Quantity</th>
-      <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: itemColumns"></tr>
-  </table>
-  <button mat-raised-button type="button" (click)="openActivityDialog()">
-    Add/Edit Activities
-  </button>
-  <table mat-table [dataSource]="activityDataSource">
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let activity">
-        {{ activity.date | date: "MMM dd, yyyy" }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let activity">
-        <div *ngIf="activity.category === 'principal'">
-          Principal
-        </div>
-        <div *ngIf="activity.category === 'interest'">
-          Interest
-        </div>
-        <div *ngIf="activity.category === 'ipayment'">
-          Interest Payment
-        </div>
-        <div *ngIf="activity.category === 'ppayment'">
-          Principal Payment
-        </div>
-        <div *ngIf="activity.category === 'appraiserFee'">
-          Appraiser fee
-        </div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef>Amount</th>
-      <td mat-cell *matCellDef="let activity">{{ activity.amount }}</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="activityColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: activityColumns"></tr>
-  </table>
-  <p *ngIf="loanForm.status === 'INVALID'">
-    Fill all the fields!
-  </p>
-  <br />
-  <button
-    mat-raised-button
-    type="Submit"
-    [disabled]="!loanForm.valid"
-    color="primary"
-  >
-    Submit
-  </button>
-  <button mat-raised-button type="button" (click)="onDelete()" color="warn">
-    Delete
-  </button>
-</form>
+  <form *ngIf="loan" (ngSubmit)="onSubmit()" [formGroup]="loanForm">
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Loan id - alt</mat-label>
+        <input
+          matInput
+          formControlName="altId"
+          placeholder="type loan book serial id"
+        />
+      </mat-form-field>
+      <span formGroupName="customer">
+        <mat-form-field>
+          <mat-label>Customer id</mat-label>
+          <input matInput placeholder="5" formControlName="id" type="number" />
+        </mat-form-field>
+      </span>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="open">Open</mat-option>
+          <mat-option value="closed">Closed</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Weight</mat-label>
+        <input
+          matInput
+          formControlName="weight"
+          type="number"
+          placeholder="4.6"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Comment</mat-label>
+        <input
+          matInput
+          formControlName="comment"
+          placeholder="return w/o receipt"
+        />
+      </mat-form-field>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Items</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="itemDataSource">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: itemColumns"></tr>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            type="button"
+            (click)="openItemDialog()"
+            color="accent"
+          >
+            Add/Edit Items
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <br />
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Activities</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="activityDataSource">
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let activity">
+                {{ activity.date | date: "MMM dd, yyyy" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef>Category</th>
+              <td mat-cell *matCellDef="let activity">
+                <div *ngIf="activity.category === 'principal'">
+                  Principal
+                </div>
+                <div *ngIf="activity.category === 'interest'">
+                  Interest
+                </div>
+                <div *ngIf="activity.category === 'ipayment'">
+                  Interest Payment
+                </div>
+                <div *ngIf="activity.category === 'ppayment'">
+                  Principal Payment
+                </div>
+                <div *ngIf="activity.category === 'appraiserFee'">
+                  Appraiser fee
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell *matCellDef="let activity">{{ activity.amount }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="activityColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: activityColumns"></tr>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            type="button"
+            (click)="openActivityDialog()"
+            color="accent"
+          >
+            Add/Edit Activities
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-card-content>
+    <p *ngIf="loanForm.status === 'INVALID'">
+      Fill all the fields!
+    </p>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        type="Submit"
+        [disabled]="!loanForm.valid"
+        color="primary"
+      >
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
+      <button mat-raised-button type="button" (click)="onDelete()" color="warn">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

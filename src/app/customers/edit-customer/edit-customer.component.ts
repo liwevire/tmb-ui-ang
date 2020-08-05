@@ -145,6 +145,7 @@ export class EditCustomerComponent implements OnInit {
       post: [customer.post, Validators.required],
       pin: [customer.pin],
       phone: [customer.phone],
+      comment: [customer.comment],
     });
   }
   ngOnInit(): void {
@@ -183,6 +184,7 @@ const emptyCustomer = {
   post: '',
   pin: '',
   phone: '',
+  comment: '',
   statusCode: 0,
   statusMessage: '',
 };

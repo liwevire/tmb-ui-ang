@@ -20,12 +20,14 @@ export class LoanListComponent implements OnInit {
   loans: ILoan[] = [];
   displayedColumns: string[] = [
     'id',
+    'altId',
     'date',
     'name',
     'post',
     'principal',
     'status',
     'weight',
+    'comment',
   ];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

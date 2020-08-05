@@ -1,5 +1,3 @@
-<br />
-<br />
 <mat-card>
   <mat-card-header>
     <mat-card-title>
@@ -7,8 +5,8 @@
       <h1 *ngIf="!customer"><br />loading...<br /></h1>
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
-    <form *ngIf="customer" (ngSubmit)="onSubmit()" [formGroup]="customerForm">
+  <form *ngIf="customer" (ngSubmit)="onSubmit()" [formGroup]="customerForm">
+    <mat-card-content>
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" placeholder="Muthu" />
@@ -30,7 +28,6 @@
         <textarea
           matInput
           formControlName="address"
-          type="t"
           placeholder="abc Apartments, main road"
         >
         </textarea>
@@ -57,24 +54,30 @@
           placeholder="9876543210"
         />
       </mat-form-field>
-
-      <p *ngIf="customerForm.status === 'INVALID'">
-        Fill all the fields!
-      </p>
-      <br />
+      <mat-form-field>
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="comment"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <p *ngIf="customerForm.status === 'INVALID'">
+      Fill all the fields!
+    </p>
+    <mat-card-actions>
       <button
         mat-raised-button
         type="Submit"
         [disabled]="!customerForm.valid"
         color="primary"
       >
-        Submit
+        <mat-icon>save</mat-icon>
+        Save
       </button>
       <button mat-raised-button type="button" (click)="onDelete()" color="warn">
+        <mat-icon>delete</mat-icon>
         Delete
       </button>
-    </form>
-  </mat-card-content>
+    </mat-card-actions>
+  </form>
 </mat-card>
 <br />
 <mat-card *ngIf="titleLoanList">
@@ -88,58 +91,66 @@
   </mat-card-content>
 </mat-card>
 <br />
-<mat-card>
+<mat-card *ngIf="titleLoanList">
   <mat-card-header>
     <mat-card-title> Customer Photo </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <img [src]="kycCustomerPhotoUrl" *ngIf="kycCustomerPhotoUrl" />
-    <div *ngIf="!showWebcamPanel">
-      <button
-        mat-raised-button
-        type="button"
-        (click)="toggleWebcam(true)"
-        color="primary"
-      >
-        Open Webcam
-      </button>
-    </div>
   </mat-card-content>
-</mat-card>
-<app-capture-customer-photo
-  (pictureTaken)="handleImage($event)"
-  *ngIf="showWebcamPanel && !webcamImage && titleLoanList"
-></app-capture-customer-photo>
-<div class="snapshot" *ngIf="showWebcamPanel && webcamImage">
-  <img [src]="webcamImage.imageAsDataUrl" />
-  <div>
-    <button
-      type="button"
-      mat-raised-button
-      mat-mini-fab
-      color="warn"
-      (click)="clearImage()"
-      title="Clear Image"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
+  <mat-card-actions *ngIf="!showWebcamPanel">
     <button
       mat-raised-button
       type="button"
-      (click)="onSavePhoto()"
+      (click)="toggleWebcam(true)"
       color="primary"
     >
+      Open Webcam
+    </button>
+  </mat-card-actions>
+</mat-card>
+<br />
+<app-capture-customer-photo
+  *ngIf="showWebcamPanel && !webcamImage && titleLoanList"
+  (pictureTaken)="handleImage($event)"
+>
+</app-capture-customer-photo>
+<mat-card *ngIf="showWebcamPanel && webcamImage">
+  <mat-card-header>
+    <mat-card-title>
+      Photo Preview
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="snapshot">
+      <img [src]="webcamImage.imageAsDataUrl" />
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="clearImage()"
+    >
+      Retake Photo
+    </button>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="onSavePhoto()"
+    >
+      <mat-icon>save</mat-icon>
       Save Photo
     </button>
-  </div>
-</div>
-<div *ngIf="showWebcamPanel">
-  <button
-    mat-raised-button
-    type="button"
-    (click)="toggleWebcam(false)"
-    color="warn"
-  >
-    Close Webcam
-  </button>
-</div>
+    <button
+      mat-raised-button
+      type="button"
+      (click)="toggleWebcam(false)"
+      color="warn"
+    >
+      Close Webcam
+    </button>
+  </mat-card-actions>
+</mat-card>

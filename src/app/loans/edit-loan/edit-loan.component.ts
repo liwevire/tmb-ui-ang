@@ -71,8 +71,7 @@ export class EditLoanComponent implements OnInit {
 
   openItemDialog(): void {
     const dialogRef = this.dialog.open(EditItemComponent, {
-      width: '450px',
-      height: '90%',
+      height: '80%',
       data: this.loan.items,
     });
 
@@ -83,7 +82,6 @@ export class EditLoanComponent implements OnInit {
   }
   openActivityDialog(): void {
     const dialogRef = this.dialog.open(EditActivityComponent, {
-      width: '700px',
       height: '90%',
       data: this.loan.activities,
     });
@@ -130,7 +128,11 @@ export class EditLoanComponent implements OnInit {
     });
   }
   prepareLoanForm(loan: ILoan) {
+    console.log('test');
+    console.log(loan.altId);
+    console.log(loan);
     this.loanForm = this.fb.group({
+      altId: [loan.altId, Validators.required],
       status: [loan.status, Validators.required],
       weight: [loan.weight, Validators.required],
       comment: [loan.comment],
@@ -138,6 +140,7 @@ export class EditLoanComponent implements OnInit {
         id: [loan.customer.id, Validators.required],
       }),
     });
+    console.log(this.loanForm.value);
   }
   refreshDataSource(): void {
     this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);
@@ -178,6 +181,7 @@ export class EditLoanComponent implements OnInit {
 
 const emptyLoan = {
   id: 0,
+  altId: '',
   status: 'open',
   weight: '0',
   comment: '',
@@ -216,6 +220,7 @@ const emptyLoan = {
     pin: '',
     phone: '',
     date: new Date(),
+    comment: '',
     statusCode: 0,
     statusMessage: '',
   },

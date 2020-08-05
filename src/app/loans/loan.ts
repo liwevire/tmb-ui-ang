@@ -5,6 +5,7 @@ import { IAppStatus } from '../AppStatus';
 
 export interface ILoan extends IAppStatus {
   id: number;
+  altId:string;
   status: string;
   weight: string;
   comment: string;

@@ -8,4 +8,5 @@ export interface ICustomer extends IAppStatus {
   post: string;
   pin: string;
   phone: string;
+  comment: string;
 }
