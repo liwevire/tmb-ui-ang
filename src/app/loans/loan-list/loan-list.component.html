@@ -1,5 +1,8 @@
 <h1>{{ title }}</h1>
-<h1 *ngIf="!dataSource"><br />loading...<br /></h1>
+<h1 *ngIf="!dataSource">
+  <br />loading...<br />
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</h1>
 <div class="mat-elevation-z6">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">

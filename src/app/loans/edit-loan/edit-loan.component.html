@@ -5,7 +5,10 @@
         <mat-card-header>
           <mat-card-title>
             {{ title }}
-            <span *ngIf="!loan"><br />loading...<br /></span>
+            <span *ngIf="!loan">
+              <br />loading...<br />
+              <mat-progress-bar mode="indeterminate"> </mat-progress-bar>
+            </span>
           </mat-card-title>
         </mat-card-header>
 

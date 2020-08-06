@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const modules = [
   CommonModule,
@@ -40,6 +41,7 @@ const modules = [
   MatListModule,
   MatMenuModule,
   MatAutocompleteModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({

@@ -2,7 +2,10 @@
   <mat-card-header>
     <mat-card-title>
       {{ title }}
-      <h1 *ngIf="!customer"><br />loading...<br /></h1>
+      <h1 *ngIf="!customer">
+        <br />loading...<br />
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </h1>
     </mat-card-title>
   </mat-card-header>
   <form *ngIf="customer" (ngSubmit)="onSubmit()" [formGroup]="customerForm">
