@@ -64,6 +64,8 @@ export class EditCustomerComponent implements OnInit {
   customerForm: FormGroup;
   percentDone: number;
   filteredPosts: Observable<string[]>;
+  filteredNames: Observable<string[]>;
+  filteredSecNames: Observable<string[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -154,15 +156,35 @@ export class EditCustomerComponent implements OnInit {
       startWith(''),
       map((value) => this._postFilter(value))
     );
+    this.filteredNames = this.customerForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._nameFilter(value))
+    );
+    this.filteredSecNames = this.customerForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._secNameFilter(value))
+    );
   }
-  private _postFilter(value) {
+  private _nameFilter(value: ICustomer) {
     let filterValue = '';
-    if (value) filterValue = value.post.toLowerCase();
-    if (this.globals.postSet)
-      return this.globals.postSet.filter(
-        (option) => option.toLowerCase().indexOf(filterValue) === 0
-      );
-    else return [];
+    if (value && value) filterValue = value.name.toLowerCase();
+    return this.globals.nameSet.filter(
+      (nameOption) => nameOption.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+  private _secNameFilter(value: ICustomer) {
+    let filterValue = '';
+    if (value && value) filterValue = value.secondaryName.toLowerCase();
+    return this.globals.nameSet.filter(
+      (nameOption) => nameOption.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+  private _postFilter(value: ICustomer) {
+    let filterValue = '';
+    if (value && value) filterValue = value.post.toLowerCase();
+    return this.globals.postSet.filter(
+      (postOption) => postOption.toLowerCase().indexOf(filterValue) === 0
+    );
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];

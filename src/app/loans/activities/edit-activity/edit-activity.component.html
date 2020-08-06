@@ -21,15 +21,15 @@
           <mat-label>Category</mat-label>
           <mat-select formControlName="category">
             <mat-option value="principal">Principal</mat-option>
-            <mat-option value="interest">Interest</mat-option>
-            <mat-option value="ipayment">Interest Payment</mat-option>
-            <mat-option value="ppayment">Principal Payment</mat-option>
+            <mat-option value="finterest">FInterest</mat-option>
+            <mat-option value="ipayment">Initial interest payment</mat-option>
+            <mat-option value="ppayment">Principal payment</mat-option>
             <mat-option value="appraiserFee">Appraiser fee</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label> <h3>Amount</h3> </mat-label>
-          <input matInput formControlName="amount" />
+          <input type="number" matInput formControlName="amount" />
         </mat-form-field>
         <a
           mat-raised-button

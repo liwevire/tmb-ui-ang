@@ -128,9 +128,6 @@ export class EditLoanComponent implements OnInit {
     });
   }
   prepareLoanForm(loan: ILoan) {
-    console.log('test');
-    console.log(loan.altId);
-    console.log(loan);
     this.loanForm = this.fb.group({
       altId: [loan.altId, Validators.required],
       status: [loan.status, Validators.required],
@@ -140,7 +137,6 @@ export class EditLoanComponent implements OnInit {
         id: [loan.customer.id, Validators.required],
       }),
     });
-    console.log(this.loanForm.value);
   }
   refreshDataSource(): void {
     this.itemDataSource = new MatTableDataSource<IItem>(this.loan.items);

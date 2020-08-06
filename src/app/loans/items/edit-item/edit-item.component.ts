@@ -44,7 +44,7 @@ export class EditItemComponent implements OnInit {
   onCancel(): void {
     this.dialogRef.close();
   }
-  private _filter(value: IItem[]): string[] {
+  private _itemFilter(value: IItem[]): string[] {
     let filterValue = '';
     if (value && value.length) filterValue = value[0].name.toLowerCase();
     return this.globals.itemSet.filter(
@@ -54,7 +54,7 @@ export class EditItemComponent implements OnInit {
   ngOnInit() {
     this.filteredItems = this.itemsForm.valueChanges.pipe(
       startWith(''),
-      map((value) => this._filter(value))
+      map((value) => this._itemFilter(value))
     );
   }
 }

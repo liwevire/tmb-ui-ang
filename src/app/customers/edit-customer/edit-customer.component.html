@@ -9,12 +9,32 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Muthu" />
+        <input matInput formControlName="name" [matAutocomplete]="nameAuto" />
+        <mat-autocomplete autoActiveFirstOption #nameAuto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredNames | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Secondary name</mat-label>
-        <input matInput formControlName="secondaryName" placeholder="Kuppu" />
+        <input
+          matInput
+          formControlName="secondaryName"
+          [matAutocomplete]="secNameAuto"
+        />
+        <mat-autocomplete autoActiveFirstOption #secNameAuto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredSecNames | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
         <mat-label> <h3>Date</h3> </mat-label>
@@ -25,16 +45,11 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Address</mat-label>
-        <textarea
-          matInput
-          formControlName="address"
-          placeholder="abc Apartments, main road"
-        >
-        </textarea>
+        <textarea matInput formControlName="address"> </textarea>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Post</mat-label>
-        <input matInput formControlName="post" placeholder="Peravurani" />
+        <input matInput formControlName="post" [matAutocomplete]="auto" />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option
             *ngFor="let option of filteredPosts | async"
@@ -46,21 +61,11 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Pin</mat-label>
-        <input
-          matInput
-          formControlName="pin"
-          type="number"
-          placeholder="614804"
-        />
+        <input matInput formControlName="pin" type="number" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Phone</mat-label>
-        <input
-          matInput
-          formControlName="phone"
-          type="tel"
-          placeholder="9876543210"
-        />
+        <input matInput formControlName="phone" type="tel" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Comment</mat-label>
@@ -104,7 +109,8 @@
     <mat-card-title> Customer Photo </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <img [src]="kycCustomerPhotoUrl" *ngIf="kycCustomerPhotoUrl" />
+    <!-- Uncomment below line to enable customer photo load -->
+    <!-- <img [src]="kycCustomerPhotoUrl" *ngIf="kycCustomerPhotoUrl" /> -->
   </mat-card-content>
   <mat-card-actions *ngIf="!showWebcamPanel">
     <button
