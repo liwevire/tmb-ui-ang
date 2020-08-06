@@ -52,12 +52,12 @@ export const MY_FORMATS = {
   ],
 })
 export class EditCustomerComponent implements OnInit {
-  // latest snapshot
+  title: string;
   kycCustomerPhotoUrl: string;
+  // latest snapshot
   webcamImage: WebcamImage = null;
   showWebcamPanel: boolean = false;
-  title: string;
-  titleLoanList: string;
+  showLoan: boolean = false;
   calHeader = CustomCalendarHeaderComponent;
   id: number;
   customer: ICustomer;
@@ -194,7 +194,7 @@ export class EditCustomerComponent implements OnInit {
           this.customer = customer;
           this.prepareCustomerForm(this.customer);
           this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
-          this.titleLoanList = 'titleLoanList';
+          this.showLoan = true;
           this.kycCustomerPhotoUrl =
             'http://192.168.43.41:6080/api/kyc/customerphoto/getById?id=' +
             customer.id;
