@@ -16,6 +16,7 @@ import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { WebcamImage } from 'ngx-webcam';
 
+import { environment } from '../../../environments/environment';
 import { CustomCalendarHeaderComponent } from '../../shared/custom-calendar-header/custom-calendar-header.component';
 import { CustomerService } from '../customer.service';
 import { KycService } from '../../kyc/kyc.service';
@@ -52,6 +53,7 @@ export const MY_FORMATS = {
   ],
 })
 export class EditCustomerComponent implements OnInit {
+  private apiHost = environment.apihost;
   title: string;
   kycCustomerPhotoUrl: string;
   // latest snapshot
@@ -196,8 +198,7 @@ export class EditCustomerComponent implements OnInit {
           this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
           this.showLoan = true;
           this.kycCustomerPhotoUrl =
-            'http://192.168.43.41:6080/api/kyc/customerphoto/getById?id=' +
-            customer.id;
+            this.apiHost + '/api/kyc/customerphoto/getById?id=' + customer.id;
         },
         error: (err) => {
           this._snackBar.open('ERROR!', 'Close', {

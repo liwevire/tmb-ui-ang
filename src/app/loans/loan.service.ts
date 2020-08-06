@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 import { ILoan } from './loan';
 
@@ -9,12 +10,12 @@ import { ILoan } from './loan';
   providedIn: 'root',
 })
 export class LoanService {
-  private loansUrl = 'http://192.168.43.41:6080/api/loan/get';
-  private loansByCustomerUrl =
-    'http://192.168.43.41:6080/api/loan/getByCustomerId';
-  private loanByIdUrl = 'http://192.168.43.41:6080/api/loan/getById';
-  private updateUrl = 'http://192.168.43.41:6080/api/loan/update';
-  private deleteUrl = 'http://192.168.43.41:6080/api/loan/delete?id=';
+  private apihost = environment.apihost;
+  private loansUrl = this.apihost + '/api/loan/get';
+  private loansByCustomerUrl = this.apihost + '/api/loan/getByCustomerId';
+  private loanByIdUrl = this.apihost + '/api/loan/getById';
+  private updateUrl = this.apihost + '/api/loan/update';
+  private deleteUrl = this.apihost + '/api/loan/delete?id=';
 
   constructor(private http: HttpClient) {}
 

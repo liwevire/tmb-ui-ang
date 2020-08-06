@@ -3,15 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAppStatus } from '../AppStatus';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KycService {
+  private apihost = environment.apihost;
   private updateCustomerPhotoUrl =
-    'http://192.168.43.41:6080/api/kyc/customerphoto/update';
+    this.apihost + '/api/kyc/customerphoto/update';
   private getCustomerPhotoUrl =
-    'http://192.168.43.41:6080/api/kyc/customerphoto/getById?id=';
+    this.apihost + '/api/kyc/customerphoto/getById?id=';
 
   constructor(private http: HttpClient) {}
 

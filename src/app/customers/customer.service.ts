@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 import { ICustomer } from './customer';
 
@@ -9,10 +10,11 @@ import { ICustomer } from './customer';
   providedIn: 'root',
 })
 export class CustomerService {
-  private customerUrl = 'http://192.168.43.41:6080/api/customer/get';
-  private customerByIdUrl = 'http://192.168.43.41:6080/api/customer/getById';
-  private updateUrl = 'http://192.168.43.41:6080/api/customer/update';
-  private deleteUrl = 'http://192.168.43.41:6080/api/customer/delete?id=';
+  private apihost = environment.apihost;
+  private customerUrl = this.apihost + '/api/customer/get';
+  private customerByIdUrl = this.apihost + '/api/customer/getById';
+  private updateUrl = this.apihost + '/api/customer/update';
+  private deleteUrl = this.apihost + '/api/customer/delete?id=';
 
   constructor(private http: HttpClient) {}
 
