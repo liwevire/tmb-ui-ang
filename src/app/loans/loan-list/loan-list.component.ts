@@ -41,6 +41,10 @@ export class LoanListComponent implements OnInit {
   getPrincipalActivity(activities: IActivity[]): IActivity {
     return getPrincipalActivity(activities) as IActivity;
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ngOnInit(): void {
     this.loanService.getLoans().subscribe({
       next: (loans) => {
