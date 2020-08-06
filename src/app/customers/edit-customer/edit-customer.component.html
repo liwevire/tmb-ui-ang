@@ -35,6 +35,14 @@
       <mat-form-field>
         <mat-label>Post</mat-label>
         <input matInput formControlName="post" placeholder="Peravurani" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredPosts | async"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Pin</mat-label>

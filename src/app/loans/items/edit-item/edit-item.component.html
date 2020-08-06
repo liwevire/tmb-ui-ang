@@ -8,7 +8,15 @@
       <ng-container [formGroup]="item">
         <mat-form-field>
           <mat-label> <h3>Item name</h3> </mat-label>
-          <input matInput formControlName="name" />
+          <input matInput formControlName="name" [matAutocomplete]="auto" />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let itemOption of filteredItems | async"
+              [value]="itemOption"
+            >
+              {{ itemOption }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
         <mat-form-field>
           <mat-label> <h3>Quantity</h3> </mat-label>

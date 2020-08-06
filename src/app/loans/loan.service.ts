@@ -9,12 +9,12 @@ import { ILoan } from './loan';
   providedIn: 'root',
 })
 export class LoanService {
-  private loansUrl = 'http://192.168.43.146:6080/api/loan/get';
+  private loansUrl = 'http://192.168.43.41:6080/api/loan/get';
   private loansByCustomerUrl =
-    'http://192.168.43.146:6080/api/loan/getByCustomerId';
-  private loanByIdUrl = 'http://192.168.43.146:6080/api/loan/getById';
-  private updateUrl = 'http://192.168.43.146:6080/api/loan/update';
-  private deleteUrl = 'http://192.168.43.146:6080/api/loan/delete?id=';
+    'http://192.168.43.41:6080/api/loan/getByCustomerId';
+  private loanByIdUrl = 'http://192.168.43.41:6080/api/loan/getById';
+  private updateUrl = 'http://192.168.43.41:6080/api/loan/update';
+  private deleteUrl = 'http://192.168.43.41:6080/api/loan/delete?id=';
 
   constructor(private http: HttpClient) {}
 

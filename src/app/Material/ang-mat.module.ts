@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const modules = [
   CommonModule,
@@ -38,6 +39,7 @@ const modules = [
   MatToolbarModule,
   MatListModule,
   MatMenuModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

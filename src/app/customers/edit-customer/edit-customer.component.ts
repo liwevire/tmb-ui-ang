@@ -21,8 +21,9 @@ import { CustomerService } from '../customer.service';
 import { KycService } from '../../kyc/kyc.service';
 import { ICustomer } from '../customer';
 import { checkApiResponse } from '../../util/apiUtil';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { IAppStatus } from 'src/app/AppStatus';
+import { Globals } from '../../util/globals';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -62,6 +63,7 @@ export class EditCustomerComponent implements OnInit {
   customer: ICustomer;
   customerForm: FormGroup;
   percentDone: number;
+  filteredPosts: Observable<string[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,7 +71,8 @@ export class EditCustomerComponent implements OnInit {
     private customerService: CustomerService,
     private kycService: KycService,
     private fb: FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public globals: Globals
   ) {}
   handleImage(webcamImage: WebcamImage) {
     this.webcamImage = webcamImage;
@@ -147,6 +150,19 @@ export class EditCustomerComponent implements OnInit {
       phone: [customer.phone],
       comment: [customer.comment],
     });
+    this.filteredPosts = this.customerForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._postFilter(value))
+    );
+  }
+  private _postFilter(value) {
+    let filterValue = '';
+    if (value) filterValue = value.post.toLowerCase();
+    if (this.globals.postSet)
+      return this.globals.postSet.filter(
+        (option) => option.toLowerCase().indexOf(filterValue) === 0
+      );
+    else return [];
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -158,7 +174,7 @@ export class EditCustomerComponent implements OnInit {
           this.title = 'Edit Customer | CustomerID: ' + this.customer.id;
           this.titleLoanList = 'titleLoanList';
           this.kycCustomerPhotoUrl =
-            'http://192.168.43.146:6080/api/kyc/customerphoto/getById?id=' +
+            'http://192.168.43.41:6080/api/kyc/customerphoto/getById?id=' +
             customer.id;
         },
         error: (err) => {

@@ -9,10 +9,10 @@ import { ICustomer } from './customer';
   providedIn: 'root',
 })
 export class CustomerService {
-  private customerUrl = 'http://192.168.43.146:6080/api/customer/get';
-  private customerByIdUrl = 'http://192.168.43.146:6080/api/customer/getById';
-  private updateUrl = 'http://192.168.43.146:6080/api/customer/update';
-  private deleteUrl = 'http://192.168.43.146:6080/api/customer/delete?id=';
+  private customerUrl = 'http://192.168.43.41:6080/api/customer/get';
+  private customerByIdUrl = 'http://192.168.43.41:6080/api/customer/getById';
+  private updateUrl = 'http://192.168.43.41:6080/api/customer/update';
+  private deleteUrl = 'http://192.168.43.41:6080/api/customer/delete?id=';
 
   constructor(private http: HttpClient) {}
 

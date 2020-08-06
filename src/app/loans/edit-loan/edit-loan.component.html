@@ -22,6 +22,7 @@
           <input matInput placeholder="5" formControlName="id" type="number" />
         </mat-form-field>
       </span>
+      {{ this.loan.customer.name }}/{{ this.loan.customer.secondaryName }}
       <mat-form-field>
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">

@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IItem } from '../../item';
+import { Globals } from '../../../util/globals';
+import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-item',
@@ -10,10 +13,12 @@ import { IItem } from '../../item';
 })
 export class EditItemComponent implements OnInit {
   itemsForm = new FormArray([]);
+  filteredItems: Observable<string[]>;
   constructor(
     public dialogRef: MatDialogRef<EditItemComponent>,
     @Inject(MAT_DIALOG_DATA) public items: IItem[],
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private globals: Globals
   ) {
     this.items.forEach((item) => {
       const itemGroup = this.fb.group({
@@ -39,6 +44,17 @@ export class EditItemComponent implements OnInit {
   onCancel(): void {
     this.dialogRef.close();
   }
-
-  ngOnInit() {}
+  private _filter(value: IItem[]): string[] {
+    let filterValue = '';
+    if (value && value.length) filterValue = value[0].name.toLowerCase();
+    return this.globals.itemSet.filter(
+      (itemOption) => itemOption.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+  ngOnInit() {
+    this.filteredItems = this.itemsForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+  }
 }

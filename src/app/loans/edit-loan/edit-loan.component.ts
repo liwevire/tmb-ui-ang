@@ -193,13 +193,6 @@ const emptyLoan = {
       category: 'principal',
       date: new Date(),
     },
-    {
-      id: 0,
-      loanId: 0,
-      amount: '15',
-      category: 'appraiserFee',
-      date: new Date(),
-    },
   ],
   items: [
     {
