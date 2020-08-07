@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apihost: 'http://192.168.43.41:6080',
+  apihost: 'http://192.168.43.146:6080',
 };
