@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apihost: 'http://192.168.43.41:6080',
+  // apihost: 'http://192.168.43.41:6080',
+  apihost: 'http://localhost:6080',
 };
 
 /*

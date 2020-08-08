@@ -3,9 +3,9 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
       <td mat-cell *matCellDef="let loan">
-        <a mat-raised-button color="primary" routerLink="/loan/{{ loan.id }}">{{
-          loan.id
-        }}</a>
+        <a mat-raised-button color="primary" routerLink="/loan/{{ loan.id }}">
+          View loan - {{ loan.id }}
+        </a>
       </td>
     </ng-container>
     <ng-container matColumnDef="altId">

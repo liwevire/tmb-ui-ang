@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CustomerService } from '../customers/customer.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class Globals {
@@ -105,7 +102,6 @@ export class Globals {
     'Lailathul',
     'Latha',
     'Laxmi',
-    'M.K.Pannerselvam',
     'Madhiyalagan',
     'Malar',
     'Mangalam',
@@ -243,7 +239,6 @@ export class Globals {
     'Jimikki',
     'KPS Modhiram (nool)',
     'Kai chain',
-    'Kai thodu jimikki',
     'Kal modhiram',
     'Kal thodu',
     'Kal thodu jimikki',
@@ -261,8 +256,6 @@ export class Globals {
     'Modhiram',
     'Modhiram (nool)',
     'Modhiram (paludhu)',
-    'Modhiram A',
-    'Modhiram N',
     'Nanal kulai',
     'Necklace',
     'Necklace (paludhu)',

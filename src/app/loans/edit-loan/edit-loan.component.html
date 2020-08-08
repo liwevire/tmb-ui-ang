@@ -63,10 +63,16 @@
       <mat-card *ngIf="this.loan.customer.name">
         <mat-card-header>
           <mat-card-title>
+            <a
+              mat-raised-button
+              color="primary"
+              routerLink="/customer/{{ this.loan.customer.id }}"
+            >
+              View customer - {{ loan.id }}
+            </a>
             {{ this.loan.customer.name }} |
             {{ this.loan.customer.secondaryName }}
           </mat-card-title>
-          <mat-card-subtitle>{{ this.loan.customer.id }}</mat-card-subtitle>
           <mat-card-content>
             Address: {{ this.loan.customer.address }},
             {{ this.loan.customer.post }} (po)
@@ -100,7 +106,7 @@
             (click)="openItemDialog()"
             color="accent"
           >
-            Add/Edit Items
+            <mat-icon>shopping_cart</mat-icon> Add/Edit Items
           </button>
         </mat-card-actions>
       </mat-card>
@@ -152,7 +158,7 @@
             (click)="openActivityDialog()"
             color="accent"
           >
-            Add/Edit Activities
+            <mat-icon>list</mat-icon> Add/Edit Activities
           </button>
         </mat-card-actions>
       </mat-card>
