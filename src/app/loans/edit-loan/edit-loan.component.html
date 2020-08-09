@@ -41,15 +41,6 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Weight</mat-label>
-            <input
-              matInput
-              formControlName="weight"
-              type="number"
-              placeholder="4.6"
-            />
-          </mat-form-field>
-          <mat-form-field>
             <mat-label>Comment</mat-label>
             <input
               matInput
@@ -58,57 +49,6 @@
             />
           </mat-form-field>
         </mat-card-content>
-      </mat-card>
-      <br />
-      <mat-card *ngIf="this.loan.customer.name">
-        <mat-card-header>
-          <mat-card-title>
-            <a
-              mat-raised-button
-              color="primary"
-              routerLink="/customer/{{ this.loan.customer.id }}"
-            >
-              View customer - {{ loan.id }}
-            </a>
-            {{ this.loan.customer.name }} |
-            {{ this.loan.customer.secondaryName }}
-          </mat-card-title>
-          <mat-card-content>
-            Address: {{ this.loan.customer.address }},
-            {{ this.loan.customer.post }} (po)
-          </mat-card-content>
-        </mat-card-header>
-        <mat-card-content> </mat-card-content>
-      </mat-card>
-      <br />
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Items</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <table mat-table [dataSource]="itemDataSource">
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let item">{{ item.name }}</td>
-            </ng-container>
-            <ng-container matColumnDef="quantity">
-              <th mat-header-cell *matHeaderCellDef>Quantity</th>
-              <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: itemColumns"></tr>
-          </table>
-        </mat-card-content>
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            type="button"
-            (click)="openItemDialog()"
-            color="accent"
-          >
-            <mat-icon>shopping_cart</mat-icon> Add/Edit Items
-          </button>
-        </mat-card-actions>
       </mat-card>
       <br />
       <mat-card>
@@ -161,6 +101,66 @@
             <mat-icon>list</mat-icon> Add/Edit Activities
           </button>
         </mat-card-actions>
+      </mat-card>
+      <br />
+      <mat-card *ngIf="this.loan.customer.name">
+        <mat-card-header>
+          <mat-card-title>
+            <a
+              mat-raised-button
+              color="primary"
+              routerLink="/customer/{{ this.loan.customer.id }}"
+            >
+              View customer - {{ loan.id }}
+            </a>
+            {{ this.loan.customer.name }} |
+            {{ this.loan.customer.secondaryName }}
+          </mat-card-title>
+          <mat-card-content>
+            Address: {{ this.loan.customer.address }},
+            {{ this.loan.customer.post }} (po)
+          </mat-card-content>
+        </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
+      <br />
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Items</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="itemDataSource">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let item">{{ item.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="itemColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: itemColumns"></tr>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            type="button"
+            (click)="openItemDialog()"
+            color="accent"
+          >
+            <mat-icon>shopping_cart</mat-icon> Add/Edit Items
+          </button>
+        </mat-card-actions>
+        <mat-form-field>
+          <mat-label>Weight</mat-label>
+          <input
+            matInput
+            formControlName="weight"
+            type="number"
+            placeholder="4.6"
+          />
+        </mat-form-field>
       </mat-card>
 
       <p *ngIf="loanForm.status === 'INVALID'">
