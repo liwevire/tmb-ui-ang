@@ -5,8 +5,8 @@
   <mat-card-content>
     <div *ngFor="let activity of activitiesForm.controls; index as i">
       <ng-container [formGroup]="activity">
-        <mat-form-field>
-          <mat-label> <h3>Date</h3> </mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label> Date </mat-label>
           <input matInput [matDatepicker]="picker" formControlName="date" />
           <mat-datepicker-toggle
             matSuffix
@@ -17,7 +17,7 @@
             [calendarHeaderComponent]="calHeader"
           ></mat-datepicker>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Category</mat-label>
           <mat-select formControlName="category">
             <mat-option value="principal">Principal</mat-option>
@@ -27,8 +27,8 @@
             <mat-option value="appraiserFee">Appraiser fee</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label> <h3>Amount</h3> </mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label> Amount </mat-label>
           <input type="number" matInput formControlName="amount" />
         </mat-form-field>
         <a
