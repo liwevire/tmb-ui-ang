@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { IReport } from './report';
+import { IInceptionReport, ILoanInterestReport } from './report';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -10,14 +10,26 @@ import { tap } from 'rxjs/operators';
 })
 export class ReportService {
   private apihost = environment.apihost;
-  private reportUrl = this.apihost + '/api/report/get';
+  private inceptionReportUrl = this.apihost + '/api/report/get';
+  private getInterstByLoanUrl = this.apihost + '/api/report/getInterestById';
   constructor(private http: HttpClient) {}
 
-  getReports(): Observable<IReport> {
-    return this.http.get<IReport>(this.reportUrl).pipe(
+  getReports(): Observable<IInceptionReport> {
+    return this.http.get<IInceptionReport>(this.inceptionReportUrl).pipe(
       tap()
       // (data) => console.log('All: ' + data)
       // catchError({err:this.handleError})
     );
+  }
+
+  getInterstByLoan(id: number): Observable<ILoanInterestReport> {
+    return this.http
+      .post<ILoanInterestReport>(this.getInterstByLoanUrl, { id: id })
+      .pipe
+      // tap((data) => {
+      //   console.log('loanService.getLoanById: ' + data);
+      // })
+      // catchError({err:this.handleError})
+      ();
   }
 }

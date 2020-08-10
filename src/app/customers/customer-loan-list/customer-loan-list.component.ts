@@ -31,6 +31,14 @@ export class CustomerLoanListComponent implements OnInit {
   getPrincipalActivity(activities: IActivity[]): IActivity {
     return getPrincipalActivity(activities) as IActivity;
   }
+
+  getTotalPrincipal() {
+    let totalPrincipal = 0;
+    this.loans.forEach((loan) => {
+      totalPrincipal += getPrincipalActivity(loan.activities).amount;
+    });
+    return totalPrincipal;
+  }
   ngOnInit(): void {
     this.loanService.getLoansByCustomerId(this.id).subscribe({
       next: (loans) => {

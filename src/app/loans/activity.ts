@@ -1,7 +1,7 @@
 export interface IActivity {
   id: number;
   loanId: number;
-  amount: string;
+  amount: number;
   category: string;
   date: Date;
 }

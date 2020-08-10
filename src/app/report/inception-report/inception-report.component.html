@@ -11,35 +11,25 @@
   <mat-card-content *ngIf="report">
     <mat-list>
       <mat-list-item>
-        <td>Principal sum:&nbsp;</td>
-        <td>
-          <b>{{ report.principalOpen }}</b>
-        </td>
+        Principal sum:&nbsp;
+        <b>{{ report.principalOpen }}</b>
       </mat-list-item>
       <mat-list-item>
-        <td>Principal paid:&nbsp;</td>
-        <td>
-          <b>{{ report.principalPaidOpen }}</b>
-        </td>
+        Principal paid:&nbsp;
+        <b>{{ report.principalPaidOpen }}</b>
       </mat-list-item>
       <mat-list-item>
-        <td>Principal Outstanding:&nbsp;</td>
-        <td>
-          <b>{{ report.principalOpen - report.principalPaidOpen }}</b>
-        </td>
+        Principal Outstanding:&nbsp;
+        <b>{{ report.principalOpen - report.principalPaidOpen }}</b>
       </mat-list-item>
-      <mat-divider></mat-divider>
+      <mat-divider inset="true"></mat-divider>
       <mat-list-item>
-        <td>Interest paid - Open:&nbsp;</td>
-        <td>
-          <b>{{ report.interestPaidOpen }}</b>
-        </td>
+        Interest paid - Open:&nbsp;
+        <b>{{ report.interestPaidOpen }}</b>
       </mat-list-item>
       <mat-list-item>
-        <td>Interest paid - Closed:&nbsp;</td>
-        <td>
-          <b>{{ report.interestPaidClosed }}</b>
-        </td>
+        Interest paid - Closed:&nbsp;
+        <b>{{ report.interestPaidClosed }}</b>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

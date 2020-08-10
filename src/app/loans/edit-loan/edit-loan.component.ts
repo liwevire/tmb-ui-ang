@@ -23,6 +23,8 @@ import { EditActivityComponent } from '../activities/edit-activity/edit-activity
 import { ILoan } from '../loan';
 import { IItem } from '../item';
 import { IActivity, activitySortByDate } from '../activity';
+import { ILoanInterestReport } from '../../report/report';
+import { ReportService } from '../../report/report.service';
 import { checkApiResponse } from '../../util/apiUtil';
 
 const moment = _rollupMoment || _moment;
@@ -55,6 +57,7 @@ export class EditLoanComponent implements OnInit {
   title: string;
   id: number;
   loan: ILoan;
+  loanInterestReport: ILoanInterestReport;
   itemDataSource: any;
   activityDataSource: any;
   itemColumns: string[] = ['name', 'quantity'];
@@ -64,6 +67,7 @@ export class EditLoanComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loanService: LoanService,
+    private reportService: ReportService,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
@@ -159,6 +163,20 @@ export class EditLoanComponent implements OnInit {
           this.refreshDataSource();
           activitySortByDate(this.loan.activities);
           this.title = 'Edit Loan | LoanID: ' + this.loan.id;
+          this.reportService.getInterstByLoan(this.loan.id).subscribe({
+            next: (loanInterestReport) => {
+              this.loanInterestReport = loanInterestReport;
+            },
+            error: (err) => {
+              this._snackBar.open(
+                'ERROR! loading interest calculations',
+                'Close',
+                {
+                  duration: 5000,
+                }
+              );
+            },
+          });
         },
         error: (err) => {
           this._snackBar.open('ERROR!', 'Close', {
@@ -185,7 +203,7 @@ const emptyLoan = {
     {
       id: 0,
       loanId: 0,
-      amount: '0',
+      amount: 0,
       category: 'principal',
       date: new Date(),
     },

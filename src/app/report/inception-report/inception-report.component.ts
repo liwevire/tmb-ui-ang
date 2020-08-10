@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReportService } from '../report.service';
-import { IReport } from '../report';
+import { IInceptionReport } from '../report';
 
 @Component({
   selector: 'app-inception-report',
@@ -10,7 +10,7 @@ import { IReport } from '../report';
 })
 export class InceptionReportComponent implements OnInit {
   title = 'Inception report';
-  report: IReport;
+  report: IInceptionReport;
   constructor(
     private reportService: ReportService,
     private _snackBar: MatSnackBar
