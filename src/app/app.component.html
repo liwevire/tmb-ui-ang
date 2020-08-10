@@ -1,6 +1,12 @@
 <mat-toolbar color="primary">
-  <button mat-button routerLink="/loans">Loans</button> |
-  <button mat-button routerLink="/loan">Loan-Add</button> |
+  <button mat-button routerLink="/loans">
+    <mat-icon>ballot</mat-icon>Loans
+  </button>
+  |
+  <button mat-button routerLink="/loan">
+    <mat-icon>add_box</mat-icon>Loan-Add
+  </button>
+  |
   <button mat-button routerLink="/customers">
     <mat-icon>people</mat-icon>
     Customers
@@ -8,6 +14,10 @@
   |
   <button mat-button routerLink="/customer">
     <mat-icon>person_add</mat-icon>Customer-Add
+  </button>
+  |
+  <button mat-button routerLink="/report/inception">
+    <mat-icon>fact_check</mat-icon>Reports
   </button>
 </mat-toolbar>
 <div class="basic-container">

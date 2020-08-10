@@ -20,9 +20,9 @@ export class KycService {
   updateCustomerPhoto(file: any): Observable<IAppStatus> {
     return this.http
       .post<IAppStatus>(this.updateCustomerPhotoUrl, file)
-      .pipe(
-        tap((data) => console.log('kycService.updateCustomerPhoto: ' + data))
-      );
+      .pipe
+      // tap((data) => console.log('kycService.updateCustomerPhoto: ' + data))
+      ();
   }
   getCustomerPhoto(id: number): Observable<IAppStatus> {
     return this.http.get<any>(this.getCustomerPhotoUrl + id);

@@ -20,40 +20,46 @@ export class LoanService {
   constructor(private http: HttpClient) {}
 
   getLoans(): Observable<ILoan[]> {
-    return this.http.get<ILoan[]>(this.loansUrl).pipe(
-      tap((data) => console.log('loanService.getLoans: ' + data))
+    return this.http
+      .get<ILoan[]>(this.loansUrl)
+      .pipe
+      // tap((data) => console.log('loanService.getLoans: ' + data))
       // catchError({err:this.handleError})
-    );
+      ();
   }
 
   getLoansByCustomerId(id: number): Observable<ILoan[]> {
     return this.http
       .post<ILoan[]>(this.loansByCustomerUrl, { id: id })
-      .pipe(
-        tap((data) => console.log('loanService.getLoansByCustomerId: ' + data))
-        // catchError({err:this.handleError})
-      );
+      .pipe
+      // tap((data) => console.log('loanService.getLoansByCustomerId: ' + data))
+      // catchError({err:this.handleError})
+      ();
   }
 
   getLoanById(id: number): Observable<ILoan> {
     return this.http
       .post<ILoan>(this.loanByIdUrl, { id: id })
-      .pipe(
-        tap((data) => {
-          console.log('loanService.getLoanById: ' + data);
-        })
-        // catchError({err:this.handleError})
-      );
+      .pipe
+      // tap((data) => {
+      //   console.log('loanService.getLoanById: ' + data);
+      // })
+      // catchError({err:this.handleError})
+      ();
   }
   updateLoan(loan: ILoan): Observable<ILoan> {
     return this.http
       .put<ILoan>(this.updateUrl, loan)
-      .pipe(tap((data) => console.log('loanService.updateLoan: ' + data)));
+      .pipe
+      // tap((data) => console.log('loanService.updateLoan: ' + data))
+      ();
   }
   deleteLoan(id: number) {
     return this.http
       .delete<ILoan>(this.deleteUrl + id)
-      .pipe(tap((data) => console.log('loanService.deleteLoan: ' + data)));
+      .pipe
+      // tap((data) => console.log('loanService.deleteLoan: ' + data))
+      ();
   }
   private handleError(err: HttpErrorResponse) {}
 }

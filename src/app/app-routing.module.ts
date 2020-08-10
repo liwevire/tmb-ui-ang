@@ -4,6 +4,7 @@ import { CustomerListComponent } from './customers/customer-list/customer-list.c
 import { LoanListComponent } from './loans/loan-list/loan-list.component';
 import { EditLoanComponent } from './loans/edit-loan/edit-loan.component';
 import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
+import { InceptionReportComponent } from './report/inception-report/inception-report.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerListComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'loans', component: LoanListComponent },
   { path: 'loan', component: EditLoanComponent },
   { path: 'loan/:id', component: EditLoanComponent },
+  { path: 'report/inception', component: InceptionReportComponent },
 ];
 
 @NgModule({

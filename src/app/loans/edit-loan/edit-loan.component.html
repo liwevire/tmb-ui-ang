@@ -106,22 +106,29 @@
       <mat-card *ngIf="this.loan.customer.name">
         <mat-card-header>
           <mat-card-title>
-            <a
-              mat-raised-button
-              color="primary"
-              routerLink="/customer/{{ this.loan.customer.id }}"
-            >
-              View customer - {{ loan.id }}
-            </a>
             {{ this.loan.customer.name }} |
             {{ this.loan.customer.secondaryName }}
           </mat-card-title>
-          <mat-card-content>
-            Address: {{ this.loan.customer.address }},
-            {{ this.loan.customer.post }} (po)
-          </mat-card-content>
+          <mat-card-subtitle>Id: {{ loan.id }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content> </mat-card-content>
+        <mat-card-content>
+          <span>
+            Address:<b>{{ this.loan.customer.address }} </b>
+          </span>
+          <br />
+          <span>
+            Post:<b> {{ this.loan.customer.post }} </b>
+          </span>
+        </mat-card-content>
+        <mat-card-actions>
+          <a
+            mat-raised-button
+            color="primary"
+            routerLink="/customer/{{ this.loan.customer.id }}"
+          >
+            <mat-icon>person</mat-icon> View customer
+          </a>
+        </mat-card-actions>
       </mat-card>
       <br />
       <mat-card>
@@ -151,16 +158,16 @@
           >
             <mat-icon>shopping_cart</mat-icon> Add/Edit Items
           </button>
+          <mat-form-field appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input
+              matInput
+              formControlName="weight"
+              type="number"
+              placeholder="4.6"
+            />
+          </mat-form-field>
         </mat-card-actions>
-        <mat-form-field appearance="outline">
-          <mat-label>Weight</mat-label>
-          <input
-            matInput
-            formControlName="weight"
-            type="number"
-            placeholder="4.6"
-          />
-        </mat-form-field>
       </mat-card>
 
       <p *ngIf="loanForm.status === 'INVALID'">
