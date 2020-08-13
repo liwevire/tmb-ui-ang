@@ -1,14 +1,44 @@
 <mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="dateForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="startDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker1">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker1 [calendarHeaderComponent]="calHeader">
+        </mat-datepicker>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>End date</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="endDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2 [calendarHeaderComponent]="calHeader">
+        </mat-datepicker>
+      </mat-form-field>
+      &nbsp;
+      <button
+        mat-raised-button
+        type="Submit"
+        [disabled]="!dateForm.valid"
+        color="primary"
+      >
+        <mat-icon>search</mat-icon>
+        Get report
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br />
+<mat-card *ngIf="report">
   <mat-card-header>
     <mat-card-title>
-      {{ title }}
-      <h1 *ngIf="!report">
-        <br />loading...<br />
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </h1>
+      Outstanding report
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content *ngIf="report">
+  <mat-card-content>
     <mat-list>
       <mat-list-item>
         Loan Principal:&nbsp;

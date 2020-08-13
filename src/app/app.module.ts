@@ -16,7 +16,6 @@ import { EditActivityComponent } from './loans/activities/edit-activity/edit-act
 import { CustomCalendarHeaderComponent } from './shared/custom-calendar-header/custom-calendar-header.component';
 import { CustomerLoanListComponent } from './customers/customer-loan-list/customer-loan-list.component';
 import { CaptureCustomerPhotoComponent } from './kyc/capture-customer-photo/capture-customer-photo.component';
-import { InceptionReportComponent } from './report/inception-report/inception-report.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { InceptionReportComponent } from './report/inception-report/inception-re
     CustomCalendarHeaderComponent,
     CustomerLoanListComponent,
     CaptureCustomerPhotoComponent,
-    InceptionReportComponent,
   ],
   imports: [
     BrowserModule,

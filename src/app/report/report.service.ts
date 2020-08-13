@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { IInceptionReport, ILoanInterestReport } from './report';
+import { IOutstandingReport, ILoanInterestReport } from './report';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -10,13 +10,23 @@ import { tap } from 'rxjs/operators';
 })
 export class ReportService {
   private apihost = environment.apihost;
-  private inceptionReportUrl = this.apihost + '/api/report/get';
+  private inceptionReportUrl = this.apihost + '/api/report/inception';
+  private datedReportUrl = this.apihost + '/api/report/dated';
   private getInterstByLoanUrl = this.apihost + '/api/report/getInterestById';
   constructor(private http: HttpClient) {}
 
-  getReports(): Observable<IInceptionReport> {
-    return this.http.get<IInceptionReport>(this.inceptionReportUrl).pipe(
+  getInceptionReport(): Observable<IOutstandingReport> {
+    return this.http.get<IOutstandingReport>(this.inceptionReportUrl).pipe(
       tap()
+      // (data) => console.log('All: ' + data)
+      // catchError({err:this.handleError})
+    );
+  }
+
+  getDatedReport(startDate: Date, endDate:Date): Observable<IOutstandingReport> {
+    return this.http.post<IOutstandingReport>(this.datedReportUrl, { startDate: startDate, endDate:endDate})
+    .pipe(
+      // tap()
       // (data) => console.log('All: ' + data)
       // catchError({err:this.handleError})
     );

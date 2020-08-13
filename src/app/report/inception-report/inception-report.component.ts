@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReportService } from '../report.service';
-import { IInceptionReport } from '../report';
+import { IOutstandingReport } from '../report';
 
 @Component({
   selector: 'app-inception-report',
@@ -10,14 +10,14 @@ import { IInceptionReport } from '../report';
 })
 export class InceptionReportComponent implements OnInit {
   title = 'Inception report';
-  report: IInceptionReport;
+  report: IOutstandingReport;
   constructor(
     private reportService: ReportService,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.reportService.getReports().subscribe({
+    this.reportService.getInceptionReport().subscribe({
       next: (report) => {
         this.report = report;
       },

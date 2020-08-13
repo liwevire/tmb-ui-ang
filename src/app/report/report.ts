@@ -1,5 +1,5 @@
 import { IAppStatus } from '../AppStatus';
-export interface IInceptionReport extends IAppStatus {
+export interface IOutstandingReport extends IAppStatus {
   principalOpen: number;
   principalPaidOpen: number;
   interestPaidOpen: number;

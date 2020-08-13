@@ -16,9 +16,17 @@
     <mat-icon>person_add</mat-icon>Customer-Add
   </button>
   |
-  <button mat-button routerLink="/report/inception">
+  <button mat-button [matMenuTriggerFor]="menu" >
     <mat-icon>fact_check</mat-icon>Reports
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/report/dated">
+      <mat-icon>date_range</mat-icon>Dated
+    </button>
+    <button mat-menu-item routerLink="/report/inception">
+      <mat-icon>store_mall_directory</mat-icon>Inception
+    </button>
+  </mat-menu>
 </mat-toolbar>
 <div class="basic-container">
   <router-outlet></router-outlet>
